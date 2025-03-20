@@ -5,7 +5,7 @@ const userSchema = new Schema({
     profilePicture: { type: String, default: "" },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     password: { type: String, required: true, },
-    phone: { type: Number, required: true, trim: true, minlength: [10, 'Phone number should be at least 10 characters'], maxlength: [10, 'Phone number should not exceed 10 characters'] },
+    phone: { type: Number, required: true, unique: true, trim: true, minlength: [10, 'Phone number should be at least 10 characters'], maxlength: [10, 'Phone number should not exceed 10 characters'] },
     resetToken: { type: String, default: null },
 });
 

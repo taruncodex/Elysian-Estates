@@ -43,7 +43,7 @@ export const signUpUser = async (req, res) => {
 
         if (checkUser) {
             console.log("user already exist with this email");
-            return res.status(400).json({ message: "user had signed up already" });
+            return res.status(400).json({ message: "This email is already in use." });
         }
 
         // Hash the password
@@ -69,7 +69,7 @@ export const signUpUser = async (req, res) => {
 
     } catch (error) {
         console.log(error.message);
-       return res.status(401).json({ message: "Invalid credentials", error: error.message });
+        return res.status(401).json({ message: "Invalid credentials", error: error.message });
     }
 }
 
@@ -132,7 +132,7 @@ export const loginUser = async (req, res) => {
 
         console.log(req.cookies);
         console.log(user);
-        
+
         // Send role of the user with success message. 
         res.status(200).json({ message: "login successful", user });
     } catch (error) {
@@ -250,9 +250,7 @@ export const resetPassword = async (req, res) => {
 
 // MiddleWare to check for the token.
 export const checkForToken = async (req, res, next) => {
-    console.log("Entered in tokenVarification.");
-
-
+    console.log("Entered in token Verification.");
     // Get the accessToken from the cookies
     const accessToken = req.cookies.accessToken;
     console.log("Request headers:", req.headers);
