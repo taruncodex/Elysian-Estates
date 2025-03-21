@@ -21,4 +21,5 @@ authRouter.post("/login", loginUser);
 authRouter.post("/forgot-password", forgotPassword);
 authRouter.post("/reset-password/:token", checkForToken, resetPassword);
 
+
 export { authRouter };
