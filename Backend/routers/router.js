@@ -13,12 +13,20 @@ export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
 // Redirect to Homepage
-router.get("/home", async (req, res) => {
+router.get("/home", checkForToken, async (req, res) => {
+
     res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
+// Serving the favorite file
+router.get("/favorite", checkForToken, async (req, res) => {
+    // console.log(req.user);
+    res.sendFile(path.join(__dirname, "../public/favorite.html"));
+});
+
+
 // http://localhost:3000/user/homeData 
-router.get("/homeData", async (req, res) => {
+router.get("/homeData", checkForToken, async (req, res) => {
     try {
 
         // 2 Sponsored docs
@@ -105,7 +113,6 @@ router.get("/homeData", async (req, res) => {
         }
         ]);
 
-        console.log({ futureProject })
         return res.status(200).json({ Sponsored, newList, futureProject });
     } catch (error) {
 
@@ -115,14 +122,17 @@ router.get("/homeData", async (req, res) => {
 });
 
 
-router.get("/search/suggestions", searchSuggestion);
+// http://localhost:3000/user/search/suggestions?query=cityName
+router.get("/search/suggestions", checkForToken, searchSuggestion);
 
 // Get the city by searching  : GET /search/results?city=cityName
-router.get("/search/results", searchResult)
+router.get("/search/results", checkForToken, searchResult)
+
 
 
 // Getting the favorite from the user data 
 router.get("/favorites", checkForToken, getFavorites)
+
 
 // Adding and removing from the favorite.
 router.post("/favorites", checkForToken, addFavorites);

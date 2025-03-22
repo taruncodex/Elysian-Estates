@@ -3,13 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./src/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="./asstes/css/index.css" />
-    <link rel="stylesheet" href="./js/index.js" />
-    <link
+    <link href="/src/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/asstes/css/index.css" />
+    <!-- <link
       rel="stylesheet"
       href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-    />
+    /> -->
     <script
       src="https://kit.fontawesome.com/1901b51c87.js"
       crossorigin="anonymous"
@@ -17,7 +16,7 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- Nav Bar  -->
+    <!----------------------- Nav Bar  ------------------------->
     <nav class="bg-gray-800">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
@@ -93,18 +92,18 @@
               <div class="flex space-x-4 mx-8">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a
-                  href="#"
+                  href="/user/home"
                   class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                   aria-current="page"
                   >Home</a
                 >
                 <a
-                  href="#"
+                  href="/user/favorite"
                   class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                   >Favorite</a
                 >
                 <a
-                  href="#"
+                  href="user/about"
                   class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                   >About</a
                 >
@@ -199,9 +198,7 @@
       </div>
     </nav>
 
-    <!--  -->
-
-    <!-- Search Bar  -->
+    <!----------------------- Header ------------------------->
     <header>
       <div class="header-contnent w-screen">
         <div class="search-box">
@@ -230,12 +227,12 @@
       </div>
     </header>
 
-    <!-- Section-1 Sponsored Cards -->
+    <!----------------------- Section-1:  Sponsored Cards ------------------------->
     <div class="container">
       <div class="sponsored-listings"></div>
     </div>
 
-    <!--  Section-2 New listing In Bangalore -->
+    <!----------------------- Section-2: New Listing ------------------------->
     <h1
       style="
         font-size: 5vmin;
@@ -294,7 +291,8 @@
       </div>
     </div>
 
-    <!-- Section-3 Apartment and villa more In Bangalore -->
+    <!----------------------- Section-3 Apartment and villa ------------------------->
+
     <h1
       style="
         font-size: 5vmin;
@@ -432,7 +430,8 @@
       </div>
     </div>
 
-    <!--  Section-4 using the New listing In Bangalore component again with different dataset   -->
+    <!---------------------- Section-4 : Future Projects ------------------------->
+
     <div class="footer">
       <h1
         style="
@@ -494,8 +493,7 @@
       </div>
     </div>
 
-    <!-- Footer -->
-
+    <!------------------------ Footer ------------------------->
     <div>
       <footer class="bg-gray-900 text-gray-400 py-16 px-4">
         <div class="flex flex-col items-center">
@@ -654,8 +652,7 @@
 </html>
 
 <script>
-  //  Search Functionality
-  // Fetch city suggestions
+  // <!------    Fetch city suggestions    ------!>
   async function fetchSuggestions(query) {
     console.log({ query });
     if (query.length < 2) {
@@ -679,12 +676,14 @@
       suggestionsList.innerHTML = "";
 
       if (data.cities.length === 0) {
-        suggestionsList.innerHTML = `<li class="p-2 text-gray-500">No matches found</li>`;
+        suggestionsList.innerHTML = `
+                <li class="p-2 text-gray-500">No matches found</li>
+                `;
       } else {
         data.cities.forEach((city) => {
           suggestionsList.innerHTML += `
-                    <li onclick="selectCity('${city}')" class="p-2 hover:bg-gray-100 cursor-pointer">${city}</li>
-                `;
+                  <li onclick="selectCity('${city}')" class="p-2 hover:bg-gray-100 cursor-pointer">${city}</li>
+                 `;
         });
       }
       suggestionsList.classList.remove("hidden");
@@ -705,12 +704,12 @@
         displaySponsored(data);
         displayNewListing(data);
       });
-
-    // .json() is also promise so you have to handle it as well .
   }
 
+  // <!-- Calling the fetchAPI function to get the homeData  -->
   fetchingApi();
 
+  // <!----- TO Display the Sponsored cards   ----->
   const displaySponsored = async (data) => {
     try {
       console.log({ data });
@@ -745,6 +744,11 @@
       console.error("Error:", error);
     }
   };
+
+  /* <!----- TO Display the  Section-2  and  Section-4  cards   ----->
+ Section-4 :  Future Projects
+ Section-2 : New Listing 
+*/
 
   const displayNewListing = async (data) => {
     const { newList, futureProject } = data;
@@ -782,6 +786,11 @@
     `;
     });
 
+   
+    
+    
+    
+    
     const container2 = document.getElementById("future-Project-list");
 
     futureProject.forEach((ele) => {
@@ -813,7 +822,7 @@
     });
   };
 
-  // Simple scroll functionality for the next and previous buttons
+  // <!----   Scrolling functionality for the next and previous buttons  of New Listing    ----->
   document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("new-listing-container");
     const prevButton = document.querySelector(".prev-button");
@@ -834,7 +843,7 @@
     });
   });
 
-  //  Sliding for the Villa apartment
+  // <!-----   Scrolling For the villa    ----->
   document.addEventListener("DOMContentLoaded", function () {
     const sliderContainer = document.querySelector(".slider-container");
     const prevButton = document.querySelector(".prev-button2");
@@ -858,4 +867,6 @@
       });
     });
   });
+
+  // <!-----  Redirect to Favorite  ----->
 </script>
