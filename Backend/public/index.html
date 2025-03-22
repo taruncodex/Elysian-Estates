@@ -769,9 +769,14 @@
                     </div>
                             
                     <div class="property-details-list">
-                       <div class="property-type-list">
-                            <span class="bhk">${ele.configuration} Flat</span>
-                        </div>
+                      <div class="property-type-list">
+                               <span class="bhk">${ele.configuration} Flat</span>
+                               <span onclick="toggleHeart(this)">
+                                 <i class="fa-regular fa-heart fa-fade fa-xl"></i>
+                               </span>
+
+                               <!-- <span> <i class="fa-solid fa-heart fa-xl" style="color: #ff3d77;"></i> </span> -->
+                       </div>
   
                         <div class="price-area">
                             <span class ="price">₹ ${ele.price}</span>
@@ -786,11 +791,6 @@
     `;
     });
 
-   
-    
-    
-    
-    
     const container2 = document.getElementById("future-Project-list");
 
     futureProject.forEach((ele) => {
@@ -807,6 +807,9 @@
                     <div class="property-details-list">
                        <div class="property-type-list">
                             <span class="bhk">${ele.configuration} Flat</span>
+                             <span onclick="toggleHeart(this); addFavorite()" >
+                                 <i class="fa-regular fa-heart fa-fade fa-xl"></i>
+                               </span>
                         </div>
   
                         <div class="price-area">
@@ -821,6 +824,22 @@
                 </div>`;
     });
   };
+
+  function toggleHeart(span) {
+    const regularHeart = '<i class="fa-regular fa-heart fa-fade fa-xl"></i>';
+    const solidHeart =
+      '<i class="fa-solid fa-heart fa-xl" style="color: #ff3d77;"></i>';
+
+    if (span.innerHTML.includes("fa-regular")) {
+      span.innerHTML = solidHeart;
+    } else {
+      span.innerHTML = regularHeart;
+    }
+  }
+
+  function addFavorite() {
+    console.log("Hiios");
+  }
 
   // <!----   Scrolling functionality for the next and previous buttons  of New Listing    ----->
   document.addEventListener("DOMContentLoaded", function () {
