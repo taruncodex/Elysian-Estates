@@ -13,6 +13,14 @@ import { router } from "./routers/router.js";
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
+const frontendUrl = ["http://127.0.0.1:3000", "http://localhost:3000"];
+const corsOptions = {
+    origin: frontendUrl,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+};
+app.use(cors(corsOptions));
 
 // Get __dirname equivalent in ES6
 export const __filename = fileURLToPath(import.meta.url);

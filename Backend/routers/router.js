@@ -5,7 +5,7 @@ import Property from "../models/propertyModel.js";
 import { Owner } from "../models/ownerModel.js";
 import { User } from "../models/userModel.js";
 import { checkForToken } from "../controllers/auth.controller.js";
-import {  addFavorites, getFavorites, removeFavorite, searchResult, searchSuggestion } from "../controllers/property.controller.js";
+import { addFavorites, getFavorites, removeFavorite, searchResult, searchSuggestion } from "../controllers/property.controller.js";
 
 
 const router = express.Router();
@@ -17,10 +17,7 @@ router.get("/home", async (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
-
-
-
-
+// http://localhost:3000/user/homeData 
 router.get("/homeData", async (req, res) => {
     try {
 
@@ -29,7 +26,7 @@ router.get("/homeData", async (req, res) => {
         const Sponsored = await Property.aggregate([
             {
                 $match: {
-                    sponsored: false
+                    sponsored: true
                 }
             },
             {
@@ -41,13 +38,17 @@ router.get("/homeData", async (req, res) => {
                 }
             },
             {
-                $limit: 3
+                $limit: 2
             },
             {
                 $project: {
+                    title: 1,
+                    propertyType: 1,
+                    residenceType: 1,
                     images: 1,
                     price: 1,
                     configuration: 1,
+                    status: "available",
                     city: "$location.city",
                     state: "$location.state",
                     owner: "$owner.name",
@@ -57,35 +58,88 @@ router.get("/homeData", async (req, res) => {
         ]);
 
         // New properties of bangalore , 8 docs
+        const newList = await Property.aggregate([
+            {
+                $match: {
+                    "location.city": "Bangalore"
+                },
+            },
+            { $limit: 8 },
+            {
+                $project: {
+                    title: 1,
+                    propertyType: 1,
+                    residenceType: 1,
+                    areaSqFt: 1,
+                    images: 1,
+                    price: 1,
+                    configuration: 1,
+                    status: 1,
+                    city: "$location.city",
+                    state: "$location.state",
+                }
+            }
+        ])
 
+        // under Construction projects of bangalore.  // 4 docs
 
-        // under Construction projects of bangalore.  // 4 docs 
+        const futureProject = await Property.aggregate([{
+            $match: {
+                status: "under Construction"
+            }
+        },
+        { $limit: 5 },
+        {
+            $project: {
+                title: 1,
+                propertyType: 1,
+                residenceType: 1,
+                areaSqFt: 1,
+                images: 1,
+                price: 1,
+                configuration: 1,
+                status: 1,
+                city: "$location.city",
+                state: "$location.state",
+            }
+        }
+        ]);
 
-        return res.status(200).json({ Sponsored });
-
+        console.log({ futureProject })
+        return res.status(200).json({ Sponsored, newList, futureProject });
     } catch (error) {
+
+        console.log(error.message)
         return res.status(500).json({ message: "Internal Server Error.", error: error.message });
     }
 });
 
 
-router.get("/search/suggestion", searchSuggestion);
+router.get("/search/suggestions", searchSuggestion);
 
 // Get the city by searching  : GET /search/results?city=cityName
-router.get("/search/results",searchResult )
+router.get("/search/results", searchResult)
 
 
 // Getting the favorite from the user data 
-router.get("/favorites", checkForToken, getFavorites )
+router.get("/favorites", checkForToken, getFavorites)
 
 // Adding and removing from the favorite.
-router.post("/favorites", checkForToken, addFavorites );
+router.post("/favorites", checkForToken, addFavorites);
 
 
 // Removing from the favorite list
 router.delete("/favorites/:id", removeFavorite);
 
 
+router.get("/property", (req, res) => {
+    try {
+
+        res.send("This is property list page")
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server error", error: error.message });
+    }
+})
 
 
 // For Adding data 

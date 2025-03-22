@@ -3,12 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="./src/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./asstes/css/index.css" />
+    <link rel="stylesheet" href="./js/index.js" />
+    <link
+      rel="stylesheet"
+      href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/1901b51c87.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Document</title>
   </head>
   <body>
     <!-- Nav Bar  -->
-
     <nav class="bg-gray-800">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
@@ -19,16 +28,14 @@
               class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
               aria-controls="mobile-menu"
               aria-expanded="false"
-              id="closeBtn"
             >
               <span class="absolute -inset-0.5"></span>
               <span class="sr-only">Open main menu</span>
-
               <!--
             Icon when menu is closed.
 
             Menu open: "hidden", Menu closed: "block"
-          -->
+             -->
               <svg
                 class="block size-6"
                 fill="none"
@@ -73,63 +80,36 @@
             <div class="flex shrink-0 items-center">
               <img
                 class="h-8 w-auto"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                src="https://res.cloudinary.com/dzm4uznev/image/upload/v1742564729/Modern_Real_Estate_Agency_Logo_Template_1_ydfrd6.png"
                 alt="Your Company"
               />
             </div>
+          </div>
 
-            <div class="hidden sm:ml-6 sm:block">
-              <div class="flex space-x-4">
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+          >
+            <div class="hidden sm:ml-6 sm:block mx-8">
+              <div class="flex space-x-4 mx-8">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a
                   href="#"
                   class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                   aria-current="page"
-                  >Dashboard</a
+                  >Home</a
                 >
                 <a
                   href="#"
                   class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  >Team</a
+                  >Favorite</a
                 >
                 <a
                   href="#"
                   class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  >Projects</a
-                >
-                <a
-                  href="#"
-                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  >Calendar</a
+                  >About</a
                 >
               </div>
             </div>
-          </div>
-          <div
-            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-          >
-            <button
-              type="button"
-              class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
-            >
-              <span class="absolute -inset-1.5"></span>
-              <span class="sr-only">View notifications</span>
-              <svg
-                class="size-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-                data-slot="icon"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
-                />
-              </svg>
-            </button>
 
             <!-- Profile dropdown -->
             <div class="relative ml-3">
@@ -143,11 +123,7 @@
                 >
                   <span class="absolute -inset-1.5"></span>
                   <span class="sr-only">Open user menu</span>
-                  <img
-                    class="size-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
+                  <img class="size-8 rounded-full" src="#" alt="" />
                 </button>
               </div>
 
@@ -207,37 +183,679 @@
             href="#"
             class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
             aria-current="page"
-            >Dashboard</a
+            >Home
+          </a>
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Favorite</a
           >
           <a
             href="#"
             class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-            >Team</a
-          >
-          <a
-            href="#"
-            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-            >Projects</a
-          >
-          <a
-            href="#"
-            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-            >Calendar</a
+            >about</a
           >
         </div>
       </div>
     </nav>
 
-    <!-- Search Bar  -->
+    <!--  -->
 
-    <!--  Bar  -->
+    <!-- Search Bar  -->
+    <header>
+      <div class="header-contnent w-screen">
+        <div class="search-box">
+          <div class="row">
+            <input
+              type="text"
+              id="input-box"
+              onkeyup="fetchSuggestions(this.value)"
+              placeholder="Search for a city..."
+              autocomplete="off"
+            />
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+
+          <div class="result-box">
+            <ul id="suggestions" class="hidden"></ul>
+          </div>
+        </div>
+
+        <div class="head">
+          <h2>Find Your Happy Place</h2>
+          <div class="line"></div>
+          <h1 class="text-2xl">A Wonderful Gift</h1>
+          <a href="#" class="ctn">Explore</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Section-1 Sponsored Cards -->
+    <div class="container">
+      <div class="sponsored-listings"></div>
+    </div>
+
+    <!--  Section-2 New listing In Bangalore -->
+    <h1
+      style="
+        font-size: 5vmin;
+        margin: 60px 10px 0px 10%;
+        color: #091e42;
+        font-weight: 700;
+      "
+    >
+      New Listings
+    </h1>
+    <p
+      style="
+        font-size: 18px;
+        margin: 0px 10px 30px 10%;
+        color: #091e42;
+        font-weight: 200;
+      "
+    >
+      In Bangalore
+    </p>
+    <div class="listContainer">
+      <div class="properties-container-list">
+        <div class="property-cards-list" id="new-listing-container"></div>
+
+        <div class="scroll-button prev-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </div>
+
+        <div class="scroll-button next-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section-3 Apartment and villa more In Bangalore -->
+    <h1
+      style="
+        font-size: 5vmin;
+        margin: 60px 10px 0px 10%;
+        color: #091e42;
+        font-weight: 700;
+      "
+    >
+      Apartments, Villa, and more
+    </h1>
+    <p
+      style="
+        font-size: 18px;
+        margin: 0px 10px 30px 10%;
+        color: #091e42;
+        font-weight: 200;
+      "
+    >
+      In Bangalore
+    </p>
+    <div class="container3">
+      <div class="property-type-slider">
+        <div class="slider-container">
+          <!-- Card 3: commercial -->
+          <div
+            class="property-type-card studio"
+            style="
+              background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742618063/09e755a3-f19e-433d-a857-8b4bf93ffe4a.png');
+              background-position: bottom;
+              background-size: cover;
+            "
+          >
+            <div class="card-content">
+              <div class="property-type-title">Commercial Property</div>
+              <div class="property-count">15+ Properties</div>
+            </div>
+          </div>
+
+          <!-- Card 1: Residential Apartment -->
+          <div
+            class="property-type-card"
+            style="
+              background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742617784/a66b2c43-bfcc-484d-8acb-769f1c5ea80a.png');
+              background-position: bottom;
+              background-size: cover;
+              background-color: #f1f8fe;
+            "
+          >
+            <div class="card-content">
+              <div class="property-type-title">Residential Apartment</div>
+              <div class="property-count">40+ Properties</div>
+            </div>
+          </div>
+
+          <!-- Card 2: Independent House/Villa -->
+          <div
+            class="property-type-card"
+            style="
+              background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742617883/1ff15560-ea42-4380-90e4-fb491748fe88.png');
+              background-position: bottom;
+              background-size: cover;
+              background-color: #e6f7ef;
+            "
+          >
+            <div class="card-content">
+              <div class="property-type-title">Independent House/ Villa</div>
+              <div class="property-count">10+ Properties</div>
+            </div>
+          </div>
+
+          <!-- Card 3: 1 RK/ Studio Apartment -->
+          <div
+            class="property-type-card residential"
+            style="
+              background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742618631/d3ad2cdd-533d-406f-9f57-3ce45320f48f.png');
+              background-position: bottom;
+              background-size: cover;
+              background-color: #c4e3f3;
+            "
+          >
+            <div class="card-content">
+              <div class="property-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="property-type-title">1 RK/ Studio Apartment</div>
+              <div class="property-count">8 Properties</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button class="scroll-button prev-button2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+
+        <button class="scroll-button next-button2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!--  Section-4 using the New listing In Bangalore component again with different dataset   -->
+    <div class="footer">
+      <h1
+        style="
+          font-size: 4vmin;
+          color: #091e42;
+          font-weight: 700;
+          margin: 0px 10px 0px 2%;
+        "
+      >
+        Interested in Future Projects ?
+      </h1>
+      <p
+        style="
+          font-size: 15px;
+          margin: 0px 10px 25px 2%;
+          color: #091e42;
+          font-weight: 200;
+        "
+      >
+        Browse Under construction options
+      </p>
+
+      <div class="listContainer">
+        <div class="properties-container-list">
+          <div class="property-cards-list" id="future-Project-list"></div>
+
+          <div class="scroll-button prev-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </div>
+
+          <div class="scroll-button next-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+
+    <div>
+      <footer class="bg-gray-900 text-gray-400 py-16 px-4">
+        <div class="flex flex-col items-center">
+          <!-- Navigation Links -->
+          <div class="flex flex-row justify-center gap-x-96 mb-12">
+            <a href="#" class="hover:text-white transition-colors px-2"
+              >About</a
+            >
+            <a href="#" class="hover:text-white transition-colors px-2">Blog</a>
+            <a href="#" class="hover:text-white transition-colors px-2">Jobs</a>
+            <a href="#" class="hover:text-white transition-colors px-2"
+              >Press</a
+            >
+            <a href="#" class="hover:text-white transition-colors px-2"
+              >Accessibility</a
+            >
+            <a href="#" class="hover:text-white transition-colors px-2"
+              >Partners</a
+            >
+          </div>
+
+          <!-- Social Media Icons -->
+          <div class="flex justify-center gap-6 mb-12">
+            <!-- Facebook -->
+            <a href="#" class="hover:text-white transition-colors">
+              <i class="fa-brands fa-facebook fa-2xl"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a href="#" class="hover:text-white transition-colors">
+              <i class="fa-brands fa-instagram fa-2xl"></i>
+            </a>
+
+            <!-- Twitter/X -->
+            <a href="#" class="hover:text-white transition-colors">
+              <i class="fa-solid fa-x fa-2xl"></i>
+            </a>
+
+            <!-- GitHub -->
+            <a href="#" class="hover:text-white transition-colors">
+              <i class="fa-brands fa-github fa-2xl"></i>
+            </a>
+
+            <!-- YouTube -->
+            <a href="#" class="hover:text-white transition-colors">
+              <i class="fa-brands fa-youtube fa-2xl"></i>
+            </a>
+          </div>
+
+          <!-- Copyright -->
+          <div class="text-center">
+            <p>&copy; 2024 Elysian Estate, Inc. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
+
+  <script>
+    // Get DOM elements
+    const mobileMenuButton = document.querySelector(
+      '[aria-controls="mobile-menu"]'
+    );
+    const mobileMenu = document.getElementById("mobile-menu");
+    const userMenuButton = document.getElementById("user-menu-button");
+    const userMenu = document.querySelector(
+      '[aria-labelledby="user-menu-button"]'
+    );
+    const menuOpenIcon = mobileMenuButton.querySelector(".block");
+    const menuCloseIcon = mobileMenuButton.querySelector(".hidden");
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+      const isExpanded =
+        mobileMenuButton.getAttribute("aria-expanded") === "true";
+
+      // Update button state
+      mobileMenuButton.setAttribute("aria-expanded", !isExpanded);
+
+      // Toggle menu visibility
+      if (isExpanded) {
+        mobileMenu.classList.add("hidden");
+        menuOpenIcon.classList.remove("hidden");
+        menuOpenIcon.classList.add("block");
+        menuCloseIcon.classList.remove("block");
+        menuCloseIcon.classList.add("hidden");
+      } else {
+        mobileMenu.classList.remove("hidden");
+        menuOpenIcon.classList.remove("block");
+        menuOpenIcon.classList.add("hidden");
+        menuCloseIcon.classList.remove("hidden");
+        menuCloseIcon.classList.add("block");
+      }
+    }
+
+    // Toggle user dropdown menu
+    function toggleUserMenu() {
+      const isExpanded =
+        userMenuButton.getAttribute("aria-expanded") === "true";
+
+      // Update button state
+      userMenuButton.setAttribute("aria-expanded", !isExpanded);
+
+      // Toggle menu visibility
+      if (isExpanded) {
+        userMenu.classList.add("hidden");
+      } else {
+        userMenu.classList.remove("hidden");
+      }
+    }
+
+    // Close user menu when clicking outside
+    function handleOutsideClick(event) {
+      if (
+        userMenu &&
+        !userMenu.classList.contains("hidden") &&
+        !userMenuButton.contains(event.target) &&
+        !userMenu.contains(event.target)
+      ) {
+        userMenu.classList.add("hidden");
+        userMenuButton.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    // Event listeners
+    mobileMenuButton.addEventListener("click", toggleMobileMenu);
+    userMenuButton.addEventListener("click", toggleUserMenu);
+    document.addEventListener("click", handleOutsideClick);
+
+    // Initialize - ensure menus are hidden initially
+    window.addEventListener("DOMContentLoaded", () => {
+      // Hide mobile menu initially
+      mobileMenu.classList.add("hidden");
+
+      // Hide user dropdown initially
+      userMenu.classList.add("hidden");
+
+      // Set initial aria-expanded states
+      mobileMenuButton.setAttribute("aria-expanded", "false");
+      userMenuButton.setAttribute("aria-expanded", "false");
+
+      // Handle resize events to reset mobile menu state when switching to desktop
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 640) {
+          // 640px is the sm breakpoint in Tailwind
+          mobileMenu.classList.add("hidden");
+          menuOpenIcon.classList.remove("hidden");
+          menuOpenIcon.classList.add("block");
+          menuCloseIcon.classList.remove("block");
+          menuCloseIcon.classList.add("hidden");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  </script>
 </html>
 
 <script>
-  const button = document.getElementById("closeBtn");
-  button.addEventListener("click", () => {
-    console.log("Hiii");
-    button.classList.add("hidden");
+  //  Search Functionality
+  // Fetch city suggestions
+  async function fetchSuggestions(query) {
+    console.log({ query });
+    if (query.length < 2) {
+      document.getElementById("suggestions").classList.add("hidden");
+      return;
+    }
+
+    // Using throttling
+    setTimeout(async () => {
+      const response = await fetch(
+        `http://localhost:3000/user/search/suggestions?query=${query}`,
+        {
+          method: "GET",
+        }
+      );
+      const data = await response.json();
+      console.log({ data });
+
+      // Show suggestions
+      const suggestionsList = document.getElementById("suggestions");
+      suggestionsList.innerHTML = "";
+
+      if (data.cities.length === 0) {
+        suggestionsList.innerHTML = `<li class="p-2 text-gray-500">No matches found</li>`;
+      } else {
+        data.cities.forEach((city) => {
+          suggestionsList.innerHTML += `
+                    <li onclick="selectCity('${city}')" class="p-2 hover:bg-gray-100 cursor-pointer">${city}</li>
+                `;
+        });
+      }
+      suggestionsList.classList.remove("hidden");
+    }, 900);
+  }
+
+  // Redirect to search results
+  function selectCity(city) {
+    window.location.href = `user/property?city=${city}`;
+  }
+
+  function fetchingApi() {
+    let url = "http://localhost:3000/user/homeData";
+    // Here by default we are fetching the original order but if the change is occur in selection then the event will trigger and the api will be updated and you will have updated results.
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        displaySponsored(data);
+        displayNewListing(data);
+      });
+
+    // .json() is also promise so you have to handle it as well .
+  }
+
+  fetchingApi();
+
+  const displaySponsored = async (data) => {
+    try {
+      console.log({ data });
+      const { Sponsored } = data;
+      console.log({ Sponsored });
+      // DOM for sponsored
+      const container = document.querySelector(".sponsored-listings");
+
+      container.innerHTML = "";
+
+      Sponsored.forEach((ele) => {
+        container.innerHTML += `
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="${ele.images[0]}" alt="title">
+                    <div class="sponsored-tag">SPONSORED</div>
+                </div>
+                <div class="property-details">
+                    <!--  <div class="marketed-by">Marketed by<br>Propshop</div> -->
+                    <h2 class="property-name">${ele.title}</h2>
+                    <p class="property-location">${ele.city}, ${ele.state}</p>
+                    <div class="property-specs">
+                        <p class="property-type">${ele.configuration} Flats</p>
+                        <p class="property-price">₹ ${ele.price} <span>onwards</span></p>
+                    </div>
+                    <button class="contact-button">Contact Agent</button>
+                </div>
+            </div>
+    `;
+      });
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const displayNewListing = async (data) => {
+    const { newList, futureProject } = data;
+    console.log({ newList });
+    console.log({ futureProject });
+
+    const container = document.getElementById("new-listing-container");
+
+    newList.forEach((ele) => {
+      container.innerHTML += `
+                <div class="property-card-list">
+                    <div class="property-image-list">
+                        <img src="${ele.images[0]}" alt="${ele.configuration} Flat">
+                        <div class="image-count">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>    <circle cx="8.5" cy="8.5" r="1.5"></circle>    <path d="M20.4 14.5L16 10 4 20"></path></svg>
+                              <div class="property-type-list"> ${ele.images.length}</div>
+                        </div>
+                    </div>
+                            
+                    <div class="property-details-list">
+                       <div class="property-type-list">
+                            <span class="bhk">${ele.configuration} Flat</span>
+                        </div>
+  
+                        <div class="price-area">
+                            <span class ="price">₹ ${ele.price}</span>
+                            <span class="separator">|</span>
+                            <span class="price">${ele.areaSqFt} sqft</span>
+                        </div>
+                           
+                        <div class="location">${ele.city}, ${ele.state}</div>
+                        <div class="status">${ele.status}</div>
+                        </div>
+                </div>
+    `;
+    });
+
+    const container2 = document.getElementById("future-Project-list");
+
+    futureProject.forEach((ele) => {
+      container2.innerHTML += `
+                <div class="property-card-list">
+                    <div class="property-image-list">
+                        <img src="${ele.images[0]}" alt="${ele.configuration} Flat">
+                        <div class="image-count">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>    <circle cx="8.5" cy="8.5" r="1.5"></circle>    <path d="M20.4 14.5L16 10 4 20"></path></svg>
+                              <div class="property-type-list"> ${ele.images.length}</div>
+                        </div>
+                    </div>
+
+                    <div class="property-details-list">
+                       <div class="property-type-list">
+                            <span class="bhk">${ele.configuration} Flat</span>
+                        </div>
+  
+                        <div class="price-area">
+                            <span class ="price">₹ ${ele.price}</span>
+                            <span class="separator">|</span>
+                            <span class="price">${ele.areaSqFt} sqft</span>
+                        </div>
+                           
+                        <div class="location">${ele.city}, ${ele.state}</div>
+                        <div class="status">${ele.status}</div>
+                        </div>
+                </div>`;
+    });
+  };
+
+  // Simple scroll functionality for the next and previous buttons
+  document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("new-listing-container");
+    const prevButton = document.querySelector(".prev-button");
+    const nextButton = document.querySelector(".next-button");
+
+    // Scroll on button click
+    nextButton.addEventListener("click", function () {
+      container.scrollBy({
+        left: 300,
+        behavior: "smooth",
+      });
+    });
+    prevButton.addEventListener("click", function () {
+      container.scrollBy({
+        left: -300,
+        behavior: "smooth",
+      });
+    });
+  });
+
+  //  Sliding for the Villa apartment
+  document.addEventListener("DOMContentLoaded", function () {
+    const sliderContainer = document.querySelector(".slider-container");
+    const prevButton = document.querySelector(".prev-button2");
+    const nextButton = document.querySelector(".next-button2");
+    const cardWidth =
+      document.querySelector(".property-type-card").offsetWidth + 20; // Width + gap
+
+    // Scroll to the next or previous set of cards
+    nextButton.addEventListener("click", function () {
+      console.log("clicked");
+      sliderContainer.scrollBy({
+        left: cardWidth,
+        behavior: "smooth",
+      });
+    });
+
+    prevButton.addEventListener("click", function () {
+      sliderContainer.scrollBy({
+        left: -cardWidth,
+        behavior: "smooth",
+      });
+    });
   });
 </script>

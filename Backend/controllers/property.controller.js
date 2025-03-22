@@ -1,7 +1,8 @@
 import { User } from "../models/userModel.js";
-
+import Property from "../models/propertyModel.js";
 export const searchSuggestion = async (req, res) => {
     try {
+        console.log("Entered into the suggestion route");
         // GET /api/search/suggestions?query=city 
         const { query } = req.query;
 
@@ -13,6 +14,8 @@ export const searchSuggestion = async (req, res) => {
         const cities = await Property.distinct("location.city", {
             "location.city": { $regex: query, $options: "i" } // Case-insensitive search
         });
+
+        console.log({ cities });
 
         return res.status(200).json({ cities });
 

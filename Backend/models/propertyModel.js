@@ -5,7 +5,7 @@ const propertySchema = new mongoose.Schema(
         title: { type: String, required: true },
         description: { type: String, required: true },
         price: { type: Number, required: true },
-        sponsored: {type: Boolean },
+        sponsored: { type: Boolean },
         propertyType: {
             type: String,
             enum: ["Residential", "Commercial", "Industrial"],
