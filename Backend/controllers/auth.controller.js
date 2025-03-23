@@ -254,13 +254,15 @@ export const checkForToken = async (req, res, next) => {
     // Get the accessToken from the cookies
     const accessToken = req.cookies.accessToken;
     console.log("Request headers:", req.headers);
-    console.log("All cookies:", accessToken);
+    console.log("All cookies:", { accessToken });
 
     // If accessToken is present then decode it and get the user data from it and save into the req.user
     if (accessToken) {
         try {
             console.log("In the If Part")
             const decode = jwt.verify(accessToken, process.env.JWT_ACCESS_PASS);
+
+            console.log({ decode })
 
             const user = await User.findOne({ _id: decode.id });
 

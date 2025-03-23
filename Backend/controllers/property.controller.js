@@ -28,16 +28,35 @@ export const searchSuggestion = async (req, res) => {
 export const searchResult = async (req, res) => {
     try {
 
-        const { city } = req.query;
-
-        if (!city) {
-            return res.status(400).json({ message: "City is required for search" });
+        console.log(req.query)
+        const { city, propertyType } = req.query;
+        console.log({ city, propertyType });
+        let query = {}
+        if (city != 'null') {
+            const cityArray = city.split(",");
+            query['location.city'] = cityArray.length > 1 ? { $in: cityArray } : cityArray[0];
         }
 
-        const properties = await Property.find({ "location.city": city });
+        if (propertyType !== 'null') {
+            const propertyTypeArray = propertyType.split(",");
+            query.propertyType = propertyTypeArray.length > 1 ? { $in: propertyTypeArray } : propertyTypeArray[0];
+        }
 
+
+        console.log({ query });
+
+        // Fetch filtered properties
+        const properties = await Property.find(query);
+
+        if (properties.length == 0) {
+            return res.status(404).json({ Message: "No Data Available" });
+        }
+
+        // console.log(properties)
         return res.status(200).json({ properties });
+
     } catch (error) {
+        console.log(error.message);
         return res.status(500).json({ message: "Internal Server Error", error: error.message });;
     }
 }
@@ -124,3 +143,64 @@ export const removeFavorite = async (req, res) => {
 
 
 
+
+export const applyFilter = async (req, res) => {
+    try {
+        const {
+            minPrice,
+            maxPrice,
+            landType,
+            propertyType,
+            residenceType,
+            configuration,
+            status,
+            city
+        } = req.query;
+
+        let query = {};
+
+        if (minPrice || maxPrice) {
+            query.price = {};
+            if (minPrice) query.price.$gte = parseInt(minPrice);
+            if (maxPrice) query.price.$lte = parseInt(maxPrice);
+        }
+
+        if (landType) {
+            query.landType = { $in: landType.split(",") };
+        }
+
+        if (propertyType) {
+            query.propertyType = { $in: propertyType.split(",") };
+        }
+
+
+        if (residenceType) {
+            query.residenceType = { $in: residenceType.split(",") };
+        }
+
+        if (configuration) {
+            query.configuration = { $in: configuration.split(",") };
+        }
+
+        if (status) {
+            query.status = { $in: status.split(",") };
+        }
+
+        console.log({ query });
+
+        // Fetch filtered properties
+        const properties = await Property.find(query);
+
+        if (properties.length == 0) {
+            return res.status(404).json({ Message: "No Data Available" });
+        }
+
+        // console.log(properties)
+        return res.status(200).json({ properties });
+
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal Server Error.", error: error.message });
+    }
+}

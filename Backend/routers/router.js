@@ -5,7 +5,7 @@ import Property from "../models/propertyModel.js";
 import { Owner } from "../models/ownerModel.js";
 import { User } from "../models/userModel.js";
 import { checkForToken } from "../controllers/auth.controller.js";
-import { addFavorites, getFavorites, removeFavorite, searchResult, searchSuggestion } from "../controllers/property.controller.js";
+import { addFavorites, getFavorites, removeFavorite, searchResult, searchSuggestion, applyFilter } from "../controllers/property.controller.js";
 
 
 const router = express.Router();
@@ -18,11 +18,34 @@ router.get("/home", checkForToken, async (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
+
 // Serving the favorite file
 router.get("/favorite", checkForToken, async (req, res) => {
     // console.log(req.user);
     res.sendFile(path.join(__dirname, "../public/favorite.html"));
 });
+
+// <!------  Property Lisst Detail  ------>
+router.get("/property", async (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, "../public/propertyList.html"))
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server error", error: error.message });
+    }
+})
+
+
+
+// <!------  Property Detail Route  -------->
+router.get("/property/:id", (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, "../public/propertyDetails.html"))
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server error", error: error.message });
+    }
+})
+
+
 
 
 // http://localhost:3000/user/homeData 
@@ -129,9 +152,10 @@ router.get("/search/suggestions", checkForToken, searchSuggestion);
 router.get("/search/results", checkForToken, searchResult)
 
 
-
 // Getting the favorite from the user data 
-router.get("/favorites", checkForToken, getFavorites)
+router.get("/favorites", checkForToken, getFavorites);
+
+router.get("/properties/filter", checkForToken, applyFilter)
 
 
 // Adding and removing from the favorite.
@@ -142,14 +166,32 @@ router.post("/favorites", checkForToken, addFavorites);
 router.delete("/favorites/:id", removeFavorite);
 
 
-router.get("/property", (req, res) => {
-    try {
 
-        res.send("This is property list page")
+// <!------------   Single Property Detail   --------------->
+router.get("/propertyDetail/:id", checkForToken, async (req, res) => {
+    try {
+        const id = req.params.id;
+        // console.log(id);
+        const details = await Property.findById(id);
+        // console.log(data);
+        if (!details) {
+            return res.status(404).json({ message: "No data Found." })
+        }
+
+        return res.status(200).json({ details })
     } catch (error) {
         res.status(500).json({ message: "Internal Server error", error: error.message });
     }
 })
+
+// router.get("/propertyDetails", checkForToken, async (req, res) => {
+//     try {
+
+
+//     } catch (error) {
+//         res.status(500).json({ message: "Internal Server error", error: error.message });
+//     }
+// })
 
 
 // For Adding data 

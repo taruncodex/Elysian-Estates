@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>This is property list Page.</h1>
+  </body>
+</html>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const city = urlParams.get("city");
+  const propertyType =  urlParams.get("propertyType");
+  console.log(city);
+
+  function fetchingApi() {
+   
+      url = `http://localhost:3000/user/search/results/?city=${city}&propertyType=${propertyType}`;
+    console.log(url);
+    // Here by default we are fetching the original order but if the change is occur in selection then the event will trigger and the api will be updated and you will have updated results.
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log({ data });
+        // displaySponsored(data);
+        // displayNewListing(data);
+      });
+  }
+
+  // <!-- Calling the fetchAPI function to get the homeData  -->
+  fetchingApi();
+</script>

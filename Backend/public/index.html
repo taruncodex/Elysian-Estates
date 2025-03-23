@@ -319,6 +319,7 @@
           <!-- Card 3: commercial -->
           <div
             class="property-type-card studio"
+            onclick="listPage('Commercial')"
             style="
               background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742618063/09e755a3-f19e-433d-a857-8b4bf93ffe4a.png');
               background-position: bottom;
@@ -677,13 +678,13 @@
 
       if (data.cities.length === 0) {
         suggestionsList.innerHTML = `
-                <li class="p-2 text-gray-500">No matches found</li>
-                `;
+                  <li class="p-2 text-gray-500">No matches found</li>
+                  `;
       } else {
         data.cities.forEach((city) => {
           suggestionsList.innerHTML += `
-                  <li onclick="selectCity('${city}')" class="p-2 hover:bg-gray-100 cursor-pointer">${city}</li>
-                 `;
+                    <li onclick="selectCity('${city}')" class="p-2 hover:bg-gray-100 cursor-pointer">${city}</li>
+                   `;
         });
       }
       suggestionsList.classList.remove("hidden");
@@ -692,18 +693,22 @@
 
   // Redirect to search results
   function selectCity(city) {
-    window.location.href = `user/property?city=${city}`;
+    window.location.href = `/user/property?city=${city}`;
   }
 
   function fetchingApi() {
-    let url = "http://localhost:3000/user/homeData";
-    // Here by default we are fetching the original order but if the change is occur in selection then the event will trigger and the api will be updated and you will have updated results.
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        displaySponsored(data);
-        displayNewListing(data);
-      });
+    try {
+      let url = "http://localhost:3000/user/homeData";
+      // Here by default we are fetching the original order but if the change is occur in selection then the event will trigger and the api will be updated and you will have updated results.
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          displaySponsored(data);
+          displayNewListing(data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // <!-- Calling the fetchAPI function to get the homeData  -->
@@ -722,23 +727,23 @@
 
       Sponsored.forEach((ele) => {
         container.innerHTML += `
-            <div class="property-card">
-                <div class="property-image">
-                    <img src="${ele.images[0]}" alt="title">
-                    <div class="sponsored-tag">SPONSORED</div>
-                </div>
-                <div class="property-details">
-                    <!--  <div class="marketed-by">Marketed by<br>Propshop</div> -->
-                    <h2 class="property-name">${ele.title}</h2>
-                    <p class="property-location">${ele.city}, ${ele.state}</p>
-                    <div class="property-specs">
-                        <p class="property-type">${ele.configuration} Flats</p>
-                        <p class="property-price">₹ ${ele.price} <span>onwards</span></p>
-                    </div>
-                    <button class="contact-button">Contact Agent</button>
-                </div>
-            </div>
-    `;
+              <div class="property-card">
+                  <div class="property-image">
+                      <img src="${ele.images[0]}" alt="title">
+                      <div class="sponsored-tag">SPONSORED</div>
+                  </div>
+                  <div class="property-details">
+                      <!--  <div class="marketed-by">Marketed by<br>Propshop</div> -->
+                      <h2 class="property-name">${ele.title}</h2>
+                      <p class="property-location">${ele.city}, ${ele.state}</p>
+                      <div class="property-specs">
+                          <p class="property-type">${ele.configuration} Flats</p>
+                          <p class="property-price">₹ ${ele.price} <span>onwards</span></p>
+                      </div>
+                      <button class="contact-button">Contact Agent</button>
+                  </div>
+              </div>
+      `;
       });
     } catch (error) {
       console.error("Error:", error);
@@ -746,9 +751,9 @@
   };
 
   /* <!----- TO Display the  Section-2  and  Section-4  cards   ----->
- Section-4 :  Future Projects
- Section-2 : New Listing 
-*/
+   Section-4 :  Future Projects
+   Section-2 : New Listing
+  */
 
   const displayNewListing = async (data) => {
     const { newList, futureProject } = data;
@@ -759,69 +764,70 @@
 
     newList.forEach((ele) => {
       container.innerHTML += `
-                <div class="property-card-list">
-                    <div class="property-image-list">
-                        <img src="${ele.images[0]}" alt="${ele.configuration} Flat">
-                        <div class="image-count">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>    <circle cx="8.5" cy="8.5" r="1.5"></circle>    <path d="M20.4 14.5L16 10 4 20"></path></svg>
-                              <div class="property-type-list"> ${ele.images.length}</div>
-                        </div>
-                    </div>
-                            
-                    <div class="property-details-list">
-                      <div class="property-type-list">
-                               <span class="bhk">${ele.configuration} Flat</span>
-                               <span onclick="toggleHeart(this)">
-                                 <i class="fa-regular fa-heart fa-fade fa-xl"></i>
-                               </span>
+                  <div class="property-card-list">
+                      <div class="property-image-list">
+                          <img src="${ele.images[0]}" alt="${ele.configuration} Flat" onclick="getPropertyDetail('${ele._id}')">
+                          <div class="image-count">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>    <circle cx="8.5" cy="8.5" r="1.5"></circle>    <path d="M20.4 14.5L16 10 4 20"></path></svg>
+                                <div class="property-type-list"> ${ele.images.length}</div>
+                          </div>
+                      </div>
 
-                               <!-- <span> <i class="fa-solid fa-heart fa-xl" style="color: #ff3d77;"></i> </span> -->
-                       </div>
-  
-                        <div class="price-area">
-                            <span class ="price">₹ ${ele.price}</span>
-                            <span class="separator">|</span>
-                            <span class="price">${ele.areaSqFt} sqft</span>
-                        </div>
-                           
-                        <div class="location">${ele.city}, ${ele.state}</div>
-                        <div class="status">${ele.status}</div>
-                        </div>
-                </div>
-    `;
+                      <div class="property-details-list">
+                        <div class="property-type-list">
+                                 <span class="bhk">${ele.configuration} Flat</span>
+                                 <span onclick="toggleHeart(this); addFavorite('${ele._id}')">
+                                   <i class="fa-regular fa-heart fa-fade fa-xl"></i>
+                                 </span>
+
+                                 <!-- <span> <i class="fa-solid fa-heart fa-xl" style="color: #ff3d77;"></i> </span> -->
+                         </div>
+
+                          <div class="price-area">
+                              <span class ="price">₹ ${ele.price}</span>
+                              <span class="separator">|</span>
+                              <span class="price">${ele.areaSqFt} sqft</span>
+                          </div>
+
+                          <div class="location">${ele.city}, ${ele.state}</div>
+                          <div class="status">${ele.status}</div>
+                          </div>
+                  </div>
+      `;
     });
 
     const container2 = document.getElementById("future-Project-list");
 
     futureProject.forEach((ele) => {
       container2.innerHTML += `
-                <div class="property-card-list">
-                    <div class="property-image-list">
-                        <img src="${ele.images[0]}" alt="${ele.configuration} Flat">
-                        <div class="image-count">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>    <circle cx="8.5" cy="8.5" r="1.5"></circle>    <path d="M20.4 14.5L16 10 4 20"></path></svg>
-                              <div class="property-type-list"> ${ele.images.length}</div>
-                        </div>
-                    </div>
+                  <div class="property-card-list">
+                      <div class="property-image-list">
+                          <img src="${ele.images[0]}" alt="${ele.configuration} Flat" onclick="getPropertyDetail('${ele._id}')">
+                          <div class="image-count">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>    <circle cx="8.5" cy="8.5" r="1.5"></circle>    <path d="M20.4 14.5L16 10 4 20"></path></svg>
+                                <div class="property-type-list"> ${ele.images.length}</div>
+                          </div>
+                      </div>
 
-                    <div class="property-details-list">
-                       <div class="property-type-list">
-                            <span class="bhk">${ele.configuration} Flat</span>
-                             <span onclick="toggleHeart(this); addFavorite()" >
-                                 <i class="fa-regular fa-heart fa-fade fa-xl"></i>
-                               </span>
-                        </div>
-  
-                        <div class="price-area">
-                            <span class ="price">₹ ${ele.price}</span>
-                            <span class="separator">|</span>
-                            <span class="price">${ele.areaSqFt} sqft</span>
-                        </div>
-                           
-                        <div class="location">${ele.city}, ${ele.state}</div>
-                        <div class="status">${ele.status}</div>
-                        </div>
-                </div>`;
+                      <div class="property-details-list">
+                         <div class="property-type-list">
+                              <span class="bhk">${ele.configuration} Flat</span>
+                               <span onclick="toggleHeart(this); addFavorite('${ele._id}')" >
+                                   <i class="fa-regular fa-heart fa-fade fa-xl"></i>
+                                 </span>
+
+                          </div>
+
+                          <div class="price-area">
+                              <span class ="price">₹ ${ele.price}</span>
+                              <span class="separator">|</span>
+                              <span class="price">${ele.areaSqFt} sqft</span>
+                          </div>
+
+                          <div class="location">${ele.city}, ${ele.state}</div>
+                          <div class="status">${ele.status}</div>
+                          </div>
+                  </div>`;
     });
   };
 
@@ -837,8 +843,44 @@
     }
   }
 
-  function addFavorite() {
-    console.log("Hiios");
+  // <!------   Function to add in the Favorite   -------->
+  async function addFavorite(propertyId) {
+    console.log({ propertyId });
+
+    const res = await fetch("http://localhost:3000/user/favorites", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        propertyId,
+      }),
+    });
+
+    const data = await res.json();
+    console.log({ data });
+  }
+
+  async function listPage(propertyType) {
+    try {
+      window.location.href = `http://localhost:3000/user/property?propertyType=${propertyType}`;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // <!---------- Function to redirect the Individual property route   ---------->
+  async function getPropertyDetail(newRoute) {
+    // const res = await fetch("http://localhost:3000/user/property", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     propertyId,
+    //   }),
+    // });
+
+    // const data = await res.json();
+    // console.log({ data });
+    console.log(newRoute);
+    window.location.href = `http://localhost:3000/user/property/${newRoute}`;
   }
 
   // <!----   Scrolling functionality for the next and previous buttons  of New Listing    ----->
