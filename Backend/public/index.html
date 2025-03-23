@@ -335,6 +335,7 @@
           <!-- Card 1: Residential Apartment -->
           <div
             class="property-type-card"
+            onclick="listPage('Residential')"
             style="
               background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742617784/a66b2c43-bfcc-484d-8acb-769f1c5ea80a.png');
               background-position: bottom;
@@ -351,6 +352,7 @@
           <!-- Card 2: Independent House/Villa -->
           <div
             class="property-type-card"
+            onclick="listPage2('Villa')"
             style="
               background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742617883/1ff15560-ea42-4380-90e4-fb491748fe88.png');
               background-position: bottom;
@@ -367,11 +369,12 @@
           <!-- Card 3: 1 RK/ Studio Apartment -->
           <div
             class="property-type-card residential"
+            onclick="listPage3('plots')"
             style="
-              background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742618631/d3ad2cdd-533d-406f-9f57-3ce45320f48f.png');
+              background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742716677/istockphoto-1440520585-1024x1024-removebg-preview_gkjmwi.png');
               background-position: bottom;
               background-size: cover;
-              background-color: #c4e3f3;
+              background-color: #d7eaea;
             "
           >
             <div class="card-content">
@@ -553,6 +556,7 @@
     </div>
   </body>
 
+  <!------------------------ Script of Navbar ------------------------->
   <script>
     // Get DOM elements
     const mobileMenuButton = document.querySelector(
@@ -662,33 +666,31 @@
     }
 
     // Using throttling
-    setTimeout(async () => {
-      const response = await fetch(
-        `http://localhost:3000/user/search/suggestions?query=${query}`,
-        {
-          method: "GET",
-        }
-      );
-      const data = await response.json();
-      console.log({ data });
+    const response = await fetch(
+      `http://localhost:3000/user/search/suggestions?query=${query}`,
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    console.log({ data });
 
-      // Show suggestions
-      const suggestionsList = document.getElementById("suggestions");
-      suggestionsList.innerHTML = "";
+    // Show suggestions
+    const suggestionsList = document.getElementById("suggestions");
+    suggestionsList.innerHTML = "";
 
-      if (data.cities.length === 0) {
-        suggestionsList.innerHTML = `
+    if (data.cities.length === 0) {
+      suggestionsList.innerHTML = `
                   <li class="p-2 text-gray-500">No matches found</li>
                   `;
-      } else {
-        data.cities.forEach((city) => {
-          suggestionsList.innerHTML += `
+    } else {
+      data.cities.forEach((city) => {
+        suggestionsList.innerHTML += `
                     <li onclick="selectCity('${city}')" class="p-2 hover:bg-gray-100 cursor-pointer">${city}</li>
                    `;
-        });
-      }
-      suggestionsList.classList.remove("hidden");
-    }, 900);
+      });
+    }
+    suggestionsList.classList.remove("hidden");
   }
 
   // Redirect to search results
@@ -728,13 +730,13 @@
       Sponsored.forEach((ele) => {
         container.innerHTML += `
               <div class="property-card">
-                  <div class="property-image">
+                  <div class="property-image" onclick="getPropertyDetail('${ele._id}')">
                       <img src="${ele.images[0]}" alt="title">
                       <div class="sponsored-tag">SPONSORED</div>
                   </div>
                   <div class="property-details">
                       <!--  <div class="marketed-by">Marketed by<br>Propshop</div> -->
-                      <h2 class="property-name">${ele.title}</h2>
+                      <h2 class="property-name" onclick="getPropertyDetail('${ele._id}')" >${ele.title}</h2>
                       <p class="property-location">${ele.city}, ${ele.state}</p>
                       <div class="property-specs">
                           <p class="property-type">${ele.configuration} Flats</p>
@@ -862,6 +864,24 @@
   async function listPage(propertyType) {
     try {
       window.location.href = `http://localhost:3000/user/property?propertyType=${propertyType}`;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //  <!--------   Residence Type Based List Page   ----------->
+  async function listPage2(residenceType) {
+    try {
+      window.location.href = `http://localhost:3000/user/property?residenceType=${residenceType}`;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //  <!--------   landType Based List Page   ----------->
+  async function listPage3(landType) {
+    try {
+      window.location.href = `http://localhost:3000/user/property?landType=${landType}`;
     } catch (error) {
       console.log(error);
     }

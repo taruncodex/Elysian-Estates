@@ -28,10 +28,11 @@ export const searchSuggestion = async (req, res) => {
 export const searchResult = async (req, res) => {
     try {
 
-        console.log(req.query)
-        const { city, propertyType } = req.query;
-        console.log({ city, propertyType });
+        const { city, propertyType, landType, residenceType } = req.query;
+        console.log({ city, propertyType, landType, residenceType });
         let query = {}
+
+
         if (city != 'null') {
             const cityArray = city.split(",");
             query['location.city'] = cityArray.length > 1 ? { $in: cityArray } : cityArray[0];
@@ -40,6 +41,16 @@ export const searchResult = async (req, res) => {
         if (propertyType !== 'null') {
             const propertyTypeArray = propertyType.split(",");
             query.propertyType = propertyTypeArray.length > 1 ? { $in: propertyTypeArray } : propertyTypeArray[0];
+        }
+
+        if (landType != 'null') {
+            const landArray = landType.split(",");
+            query.landType = landArray.length > 1 ? { $in: landArray } : landArray[0];
+        }
+
+        if (residenceType != 'null') {
+            const residenceArray = residenceType.split(",");
+            query.residenceType = residenceArray.length > 1 ? { $in: residenceArray } : residenceArray[0];
         }
 
 
@@ -53,7 +64,7 @@ export const searchResult = async (req, res) => {
         }
 
         // console.log(properties)
-        return res.status(200).json({ properties });
+        return res.status(200).json({ properties, metaData: { city, propertyType, landType, residenceType } });
 
     } catch (error) {
         console.log(error.message);
