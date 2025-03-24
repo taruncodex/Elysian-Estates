@@ -1,5 +1,102 @@
 import { User } from "../models/userModel.js";
 import Property from "../models/propertyModel.js";
+
+export const homeData = async (req, res) => {
+    try {
+
+        // 2 Sponsored docs
+        // 1 image ,  location.city, state , price  , contact , configuration.
+        const Sponsored = await Property.aggregate([
+            {
+                $match: {
+                    sponsored: true
+                }
+            },
+            {
+                $lookup: {
+                    from: "owners", // Name of the 'Owner' collection
+                    localField: "listedBy", // Field in Property referencing Owner's _id
+                    foreignField: "_id", // Owner's _id field
+                    as: "owner"
+                }
+            },
+            {
+                $limit: 2
+            },
+            {
+                $project: {
+                    title: 1,
+                    propertyType: 1,
+                    residenceType: 1,
+                    images: 1,
+                    price: 1,
+                    configuration: 1,
+                    status: "available",
+                    city: "$location.city",
+                    state: "$location.state",
+                    owner: "$owner.name",
+                    phone: "$owner.phone"
+                }
+            }
+        ]);
+
+        // New properties of bangalore , 8 docs
+        const newList = await Property.aggregate([
+            {
+                $match: {
+                    "location.city": "Bangalore"
+                },
+            },
+            { $limit: 8 },
+            {
+                $project: {
+                    title: 1,
+                    propertyType: 1,
+                    residenceType: 1,
+                    areaSqFt: 1,
+                    images: 1,
+                    price: 1,
+                    configuration: 1,
+                    status: 1,
+                    city: "$location.city",
+                    state: "$location.state",
+                }
+            }
+        ])
+
+        // under Construction projects of bangalore.  // 4 docs
+
+        const futureProject = await Property.aggregate([{
+            $match: {
+                status: "under Construction"
+            }
+        },
+        { $limit: 5 },
+        {
+            $project: {
+                title: 1,
+                propertyType: 1,
+                residenceType: 1,
+                areaSqFt: 1,
+                images: 1,
+                price: 1,
+                configuration: 1,
+                status: 1,
+                city: "$location.city",
+                state: "$location.state",
+            }
+        }
+        ]);
+
+        return res.status(200).json({ Sponsored, newList, futureProject });
+    } catch (error) {
+
+        console.log(error.message)
+        return res.status(500).json({ message: "Internal Server Error.", error: error.message });
+    }
+}
+
+
 export const searchSuggestion = async (req, res) => {
     try {
         console.log("Entered into the suggestion route");
@@ -221,3 +318,4 @@ export const applyFilter = async (req, res) => {
         return res.status(500).json({ message: "Internal Server Error.", error: error.message });
     }
 }
+
