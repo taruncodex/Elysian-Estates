@@ -889,16 +889,6 @@
 
   // <!---------- Function to redirect the Individual property route   ---------->
   async function getPropertyDetail(newRoute) {
-    // const res = await fetch("http://localhost:3000/user/property", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     propertyId,
-    //   }),
-    // });
-
-    // const data = await res.json();
-    // console.log({ data });
     console.log(newRoute);
     window.location.href = `http://localhost:3000/user/property/${newRoute}`;
   }

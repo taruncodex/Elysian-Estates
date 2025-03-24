@@ -27,11 +27,17 @@ export const searchSuggestion = async (req, res) => {
 
 export const searchResult = async (req, res) => {
     try {
-
-        const { city, propertyType, landType, residenceType } = req.query;
+        const { city, propertyType, landType, residenceType, } = req.query;
+        let { page, limit } = req.query;
         console.log({ city, propertyType, landType, residenceType });
         let query = {}
 
+        // Convert to numbers and set default values
+        page = parseInt(page) || 1;
+        limit = parseInt(limit) || 10;
+
+        // Calculate the starting index
+        const startIndex = (page - 1) * limit;
 
         if (city != 'null') {
             const cityArray = city.split(",");
@@ -57,7 +63,7 @@ export const searchResult = async (req, res) => {
         console.log({ query });
 
         // Fetch filtered properties
-        const properties = await Property.find(query);
+        const properties = await Property.find(query).populate("listedBy").skip(startIndex).limit(limit);
 
         if (properties.length == 0) {
             return res.status(404).json({ Message: "No Data Available" });

@@ -20,6 +20,7 @@
         max-width: 1050px;
         position: relative;
         margin: 25px auto;
+        border-bottom-right-radius: 9rem;
       }
 
       .image-gallery {
@@ -201,7 +202,9 @@
         justify-content: space-between;
         align-items: center;
         border-top: 1px solid #eee;
-        padding-top: 15px;
+        padding: 10px 5px;
+        background-color: #f5f5f5;
+        border-radius: 30px;
       }
 
       .agent-info {
@@ -255,6 +258,7 @@
         font-size: 14px;
         cursor: pointer;
         border: none;
+        border-bottom-right-radius: 10rem;
       }
 
       .btn-outline {
@@ -596,6 +600,11 @@
   </script>
 </html>
 <script>
+  let page = 1; // Start with the first page
+  const limit = 6; // Number of properties to load per request
+  let isLoading = false; // Prevent multiple API calls
+  let hasMoreData = true; // Stop fetching if no more data
+
   const urlParams = new URLSearchParams(window.location.search);
   const city = urlParams.get("city");
   const propertyType = urlParams.get("propertyType");
@@ -603,30 +612,40 @@
   const residenceType = urlParams.get("residenceType");
   console.log(city);
 
-  function fetchingApi() {
-    url = `http://localhost:3000/user/search/results/?city=${city}&propertyType=${propertyType}&residenceType=${residenceType}&landType=${landType}`;
-    console.log(url);
-    // Here by default we are fetching the original order but if the change is occur in selection then the event will trigger and the api will be updated and you will have updated results.
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log({ data });
-        displaycards(data);
-        // displayNewListing(data);
-      });
+  async function fetchingApi() {
+    if (isLoading || !hasMoreData) return;
+
+    isLoading = true; // Prevent multiple calls
+    const url = `http://localhost:3000/user/search/results/?city=${city}&propertyType=${propertyType}&residenceType=${residenceType}&landType=${landType}&page=${page}&limit=${limit}`;
+
+    console.log({ url });
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      // If no properties found, stop further fetching
+      if (data.properties.length === 0) {
+        hasMoreData = false;
+        document.getElementById("end-message").classList.remove("hidden");
+        return;
+      }
+
+      displaycards(data);
+      page++; // Move to next page after loading
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+    } finally {
+      isLoading = false;
+    }
   }
 
-  // <!-- Calling the fetchAPI function to get the homeData  -->
+  // Initial fetch
   fetchingApi();
 
   async function displaycards(data) {
-    console.log({ data });
     const { properties } = data;
-    console.log(properties);
-
     const container = document.getElementById("Card-Container");
-
-    container.innerHTML = "";
 
     properties.forEach((ele) => {
       const perSqrt = Math.floor(ele.price / ele.areaSqFt);
@@ -635,6 +654,8 @@
       let curr = new Date();
       const milliseconds = curr - new Date(ele.createdAt);
       const time = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+
+      // Append new listings dynamically
       container.innerHTML += `
        <div class="listing-card">
         <div class="image-gallery">
@@ -667,12 +688,17 @@
             <span>🔥</span> 5 people viewed this property today
           </div>
           <div class="more-photos">+5 more</div>
-
         </div>
 
         <div class="listing-details">
           <div class="resale-tag">${ele.status}</div>
-          <h1 class="property-title">${ele.title}</h1>
+          <h1 
+           class="property-title"  
+           onclick="getPropertyDetail('${ele._id}')"
+           >
+              ${ele.title}
+          </h1>
+          
           <p class="property-subtitle">
            ${ele.configuration} Flat in ${ele.location.city}, ${ele.location.state}
           </p>
@@ -707,25 +733,27 @@
               <span class="tag">${ele.amenities[0]}</span>
               <span class="tag">${ele.amenities[1]}</span>
               <span class="tag">${ele.amenities[2]}</span>
-              <span class="tag">${ele.amenities[3]}</span>
             </div>
           </div>
 
           <div class="listing-footer">
             <div class="agent-info">
               <img
-                src="/api/placeholder/40/40"
+                src="${ele.listedBy.profilePicture}"
                 alt="Agent"
                 class="agent-image"
               />
               <div class="agent-details">
-                <span class="featured-dealer">FEATURED DEALER</span>
-                <span class="agent-name">Starlike Invest...</span>
+                <span class="featured-dealer">Owner</span>
+                <span class="agent-name">${ele.listedBy.name}</span>
               </div>
               <span class="posted-time">${time}d ago</span>
             </div>
             <div class="action-buttons">
-              <button class="btn btn-outline">View Number</button>
+              <button 
+                class="btn btn-outline"
+                onclick="getPropertyDetail('${ele._id}')"
+              >View Details</button>
               <button class="btn btn-primary">
                 <span class="phone-icon">📞</span> Contact
               </button>
@@ -736,4 +764,24 @@
       `;
     });
   }
+
+  // Function to redirect to individual property route
+  async function getPropertyDetail(newRoute) {
+    console.log(newRoute);
+    window.location.href = `http://localhost:3000/user/property/${newRoute}`;
+  }
+
+  // Infinite Scroll with Debounce
+  let scrollTimeout;
+  window.addEventListener("scroll", () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100
+      ) {
+        fetchingApi(); // Load more properties
+      }
+    }, 200); // Delay API calls by 200ms
+  });
 </script>
