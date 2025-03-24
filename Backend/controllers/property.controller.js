@@ -319,3 +319,20 @@ export const applyFilter = async (req, res) => {
     }
 }
 
+
+
+export const propertyDetails = async (req, res) => {
+    try {
+        const id = req.params.id;
+        // console.log(id);
+        const details = await Property.findById(id);
+        // console.log(data);
+        if (!details) {
+            return res.status(404).json({ message: "No data Found." })
+        }
+
+        return res.status(200).json({ details })
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server error", error: error.message });
+    }
+}

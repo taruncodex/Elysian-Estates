@@ -5,7 +5,7 @@ import Property from "../models/propertyModel.js";
 import { Owner } from "../models/ownerModel.js";
 import { User } from "../models/userModel.js";
 import { checkForToken } from "../controllers/auth.controller.js";
-import { addFavorites, getFavorites, removeFavorite, searchResult, searchSuggestion, applyFilter, homeData } from "../controllers/property.controller.js";
+import { addFavorites, getFavorites, removeFavorite, searchResult, searchSuggestion, applyFilter, homeData,propertyDetails } from "../controllers/property.controller.js";
 
 
 const router = express.Router();
@@ -75,21 +75,7 @@ router.delete("/favorites/:id", removeFavorite);
 
 
 // <!------------   Single Property Detail   --------------->
-router.get("/propertyDetail/:id", checkForToken, async (req, res) => {
-    try {
-        const id = req.params.id;
-        // console.log(id);
-        const details = await Property.findById(id);
-        // console.log(data);
-        if (!details) {
-            return res.status(404).json({ message: "No data Found." })
-        }
-
-        return res.status(200).json({ details })
-    } catch (error) {
-        res.status(500).json({ message: "Internal Server error", error: error.message });
-    }
-})
+router.get("/propertyDetail/:id", checkForToken, propertyDetails)
 
 // router.get("/propertyDetails", checkForToken, async (req, res) => {
 //     try {

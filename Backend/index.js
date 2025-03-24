@@ -13,7 +13,7 @@ import { router } from "./routers/router.js";
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-const frontendUrl = ["http://127.0.0.1:3000", "http://localhost:3000"];
+const frontendUrl = ["http://127.0.0.1:3000", "http://localhost:3000", "https://elysian-estates-frontend.onrender.com"];
 const corsOptions = {
     origin: frontendUrl,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
