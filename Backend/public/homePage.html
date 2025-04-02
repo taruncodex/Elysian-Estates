@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/src/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/asstes/css/index.css" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+    /> -->
+    <script
+      src="https://kit.fontawesome.com/1901b51c87.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <!----------------------- Nav Bar  ------------------------->
+    <nav class="bg-gray-800">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            <button
+              type="button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
+              <!--
+            Icon when menu is closed.
+
+            Menu open: "hidden", Menu closed: "block"
+             -->
+              <svg
+                class="block size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+              <!--
+            Icon when menu is open.
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+              <svg
+                class="hidden size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+          >
+            <div class="flex shrink-0 items-center">
+              <img
+                class="h-8 w-auto"
+                src="https://res.cloudinary.com/dzm4uznev/image/upload/v1742564729/Modern_Real_Estate_Agency_Logo_Template_1_ydfrd6.png"
+                alt="Your Company"
+              />
+            </div>
+          </div>
+
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+          >
+            <div class="hidden sm:ml-6 sm:block mx-8">
+              <div class="flex space-x-4 mx-8">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a
+                  href="/user/home"
+                  class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                  aria-current="page"
+                  >Home</a
+                >
+                <a
+                  href="/user/favorite"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Favorite</a
+                >
+                <a
+                  href="user/about"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >About</a
+                >
+              </div>
+            </div>
+
+            <!-- Profile dropdown -->
+            <div class="relative ml-3">
+              <div>
+                <button
+                  type="button"
+                  class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="size-8 rounded-full"
+                    id="profilePic"
+                    alt="User Pic"
+                  />
+                </button>
+              </div>
+              <!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
+              <div
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+                tabindex="-1"
+              >
+                <!-- Active: "bg-gray-100 outline-hidden", Not Active: "" -->
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-0"
+                  onclick="openUserProfile()"
+                  >Your Profile</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-1"
+                  >Settings</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-2"
+                  >Sign out</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div class="sm:hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pt-2 pb-3">
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a
+            href="#"
+            class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+            aria-current="page"
+            >Home
+          </a>
+          <a
+            href="/favorite"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Favorite</a
+          >
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >about</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!----------------------- Header ------------------------->
+    <header>
+      <div class="header-contnent w-screen">
+        <div class="search-box">
+          <div class="row">
+            <input
+              type="text"
+              id="input-box"
+              onkeyup="fetchSuggestions(this.value)"
+              placeholder="Search for a city..."
+              autocomplete="off"
+            />
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+
+          <div class="result-box">
+            <ul id="suggestions" class="hidden"></ul>
+          </div>
+        </div>
+
+        <div class="head">
+          <h2>Find Your Happy Place</h2>
+          <div class="line"></div>
+          <h1 class="text-2xl">A Wonderful Gift</h1>
+          <a href="#" class="ctn">Explore</a>
+        </div>
+      </div>
+    </header>
+
+    <!----------------------- Section-1:  Sponsored Cards ------------------------->
+    <div class="container">
+      <div class="sponsored-listings"></div>
+    </div>
+
+    <!----------------------- Section-2: New Listing ------------------------->
+    <h1
+      style="
+        font-size: 5vmin;
+        margin: 60px 10px 0px 10%;
+        color: #091e42;
+        font-weight: 700;
+      "
+    >
+      New Listings
+    </h1>
+    <p
+      style="
+        font-size: 18px;
+        margin: 0px 10px 30px 10%;
+        color: #091e42;
+        font-weight: 200;
+      "
+    >
+      In Bangalore
+    </p>
+    <div class="listContainer">
+      <div class="properties-container-list">
+        <div class="property-cards-list" id="new-listing-container"></div>
+
+        <div class="scroll-button prev-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </div>
+
+        <div class="scroll-button next-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!----------------------- Section-3 Apartment and villa ------------------------->
+
+    <h1
+      style="
+        font-size: 5vmin;
+        margin: 60px 10px 0px 10%;
+        color: #091e42;
+        font-weight: 700;
+      "
+    >
+      Apartments, Villa, and more
+    </h1>
+    <p
+      style="
+        font-size: 18px;
+        margin: 0px 10px 30px 10%;
+        color: #091e42;
+        font-weight: 200;
+      "
+    >
+      In Bangalore
+    </p>
+    <div class="container3">
+      <div class="property-type-slider">
+        <div class="slider-container">
+          <!-- Card 3: commercial -->
+          <div
+            class="property-type-card studio"
+            onclick="listPage('Commercial')"
+            style="
+              background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742618063/09e755a3-f19e-433d-a857-8b4bf93ffe4a.png');
+              background-position: bottom;
+              background-size: cover;
+            "
+          >
+            <div class="card-content">
+              <div class="property-type-title">Commercial Property</div>
+              <div class="property-count">15+ Properties</div>
+            </div>
+          </div>
+
+          <!-- Card 1: Residential Apartment -->
+          <div
+            class="property-type-card"
+            onclick="listPage('Residential')"
+            style="
+              background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742617784/a66b2c43-bfcc-484d-8acb-769f1c5ea80a.png');
+              background-position: bottom;
+              background-size: cover;
+              background-color: #f1f8fe;
+            "
+          >
+            <div class="card-content">
+              <div class="property-type-title">Residential Apartment</div>
+              <div class="property-count">40+ Properties</div>
+            </div>
+          </div>
+
+          <!-- Card 2: Independent House/Villa -->
+          <div
+            class="property-type-card"
+            onclick="listPage2('Villa')"
+            style="
+              background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742617883/1ff15560-ea42-4380-90e4-fb491748fe88.png');
+              background-position: bottom;
+              background-size: cover;
+              background-color: #e6f7ef;
+            "
+          >
+            <div class="card-content">
+              <div class="property-type-title">Independent House/ Villa</div>
+              <div class="property-count">10+ Properties</div>
+            </div>
+          </div>
+
+          <!-- Card 3: 1 RK/ Studio Apartment -->
+          <div
+            class="property-type-card residential"
+            onclick="listPage3('plots')"
+            style="
+              background-image: url('https://res.cloudinary.com/dzm4uznev/image/upload/v1742716677/istockphoto-1440520585-1024x1024-removebg-preview_gkjmwi.png');
+              background-position: bottom;
+              background-size: cover;
+              background-color: #d7eaea;
+            "
+          >
+            <div class="card-content">
+              <div class="property-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="property-type-title">1 RK/ Studio Apartment</div>
+              <div class="property-count">8 Properties</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button class="scroll-button prev-button2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+
+        <button class="scroll-button next-button2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!---------------------- Section-4 : Future Projects ------------------------->
+
+    <div class="container4">
+      <h1
+        style="
+          font-size: 4vmin;
+          color: #091e42;
+          font-weight: 700;
+          margin: 0px 10px 0px 2%;
+        "
+      >
+        Interested in Future Projects ?
+      </h1>
+      <p
+        style="
+          font-size: 15px;
+          margin: 0px 10px 25px 2%;
+          color: #091e42;
+          font-weight: 200;
+        "
+      >
+        Browse Under construction options
+      </p>
+
+      <div class="listContainer">
+        <div class="properties-container-list">
+          <div class="property-cards-list" id="future-Project-list"></div>
+
+          <div class="scroll-button prev-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </div>
+
+          <div class="scroll-button next-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!------------------------ Footer ------------------------->
+    <footer>
+      <div class="footer">
+        <div class="row">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="#"><i class="fa fa-youtube"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+        </div>
+
+        <div class="row">
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Career</a></li>
+          </ul>
+        </div>
+
+        <div class="row">
+          INFERNO Copyright © 2021 Inferno - All rights reserved || Designed By:
+          Mahesh
+        </div>
+      </div>
+    </footer>
+  </body>
+
+  <!------------------------ Script of Navbar ------------------------->
+  <script>
+    // Get DOM elements
+    const mobileMenuButton = document.querySelector(
+      '[aria-controls="mobile-menu"]'
+    );
+    const mobileMenu = document.getElementById("mobile-menu");
+    const userMenuButton = document.getElementById("user-menu-button");
+    const userMenu = document.querySelector(
+      '[aria-labelledby="user-menu-button"]'
+    );
+    const menuOpenIcon = mobileMenuButton.querySelector(".block");
+    const menuCloseIcon = mobileMenuButton.querySelector(".hidden");
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+      const isExpanded =
+        mobileMenuButton.getAttribute("aria-expanded") === "true";
+
+      // Update button state
+      mobileMenuButton.setAttribute("aria-expanded", !isExpanded);
+
+      // Toggle menu visibility
+      if (isExpanded) {
+        mobileMenu.classList.add("hidden");
+        menuOpenIcon.classList.remove("hidden");
+        menuOpenIcon.classList.add("block");
+        menuCloseIcon.classList.remove("block");
+        menuCloseIcon.classList.add("hidden");
+      } else {
+        mobileMenu.classList.remove("hidden");
+        menuOpenIcon.classList.remove("block");
+        menuOpenIcon.classList.add("hidden");
+        menuCloseIcon.classList.remove("hidden");
+        menuCloseIcon.classList.add("block");
+      }
+    }
+
+    // Toggle user dropdown menu
+    function toggleUserMenu() {
+      const isExpanded =
+        userMenuButton.getAttribute("aria-expanded") === "true";
+
+      // Update button state
+      userMenuButton.setAttribute("aria-expanded", !isExpanded);
+
+      // Toggle menu visibility
+      if (isExpanded) {
+        userMenu.classList.add("hidden");
+      } else {
+        userMenu.classList.remove("hidden");
+      }
+    }
+
+    // Close user menu when clicking outside
+    function handleOutsideClick(event) {
+      if (
+        userMenu &&
+        !userMenu.classList.contains("hidden") &&
+        !userMenuButton.contains(event.target) &&
+        !userMenu.contains(event.target)
+      ) {
+        userMenu.classList.add("hidden");
+        userMenuButton.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    // Event listeners
+    mobileMenuButton.addEventListener("click", toggleMobileMenu);
+    userMenuButton.addEventListener("click", toggleUserMenu);
+    document.addEventListener("click", handleOutsideClick);
+
+    // Initialize - ensure menus are hidden initially
+    window.addEventListener("DOMContentLoaded", () => {
+      // Hide mobile menu initially
+      mobileMenu.classList.add("hidden");
+
+      // Hide user dropdown initially
+      userMenu.classList.add("hidden");
+
+      // Set initial aria-expanded states
+      mobileMenuButton.setAttribute("aria-expanded", "false");
+      userMenuButton.setAttribute("aria-expanded", "false");
+
+      // Handle resize events to reset mobile menu state when switching to desktop
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 640) {
+          // 640px is the sm breakpoint in Tailwind
+          mobileMenu.classList.add("hidden");
+          menuOpenIcon.classList.remove("hidden");
+          menuOpenIcon.classList.add("block");
+          menuCloseIcon.classList.remove("block");
+          menuCloseIcon.classList.add("hidden");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  </script>
+</html>
+
+<script>
+  let userId = "";
+
+  // <!------    Fetch city suggestions    ------!>
+  async function fetchSuggestions(query) {
+    console.log({ query });
+    if (query.length < 2) {
+      document.getElementById("suggestions").classList.add("hidden");
+      return;
+    }
+
+    // Using throttling
+    const response = await fetch(
+      `http://localhost:3000/user/search/suggestions?query=${query}`,
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    console.log({ data });
+
+    // Show suggestions
+    const suggestionsList = document.getElementById("suggestions");
+    suggestionsList.innerHTML = "";
+
+    if (data.cities.length === 0) {
+      suggestionsList.innerHTML = `
+                  <li class="p-2 text-gray-500">No matches found</li>
+                  `;
+    } else {
+      data.cities.forEach((city) => {
+        suggestionsList.innerHTML += `
+                    <li onclick="selectCity('${city}')" class="p-2 hover:bg-gray-100 cursor-pointer">${city}</li>
+                   `;
+      });
+    }
+    suggestionsList.classList.remove("hidden");
+  }
+
+  // Redirect to search results
+  function selectCity(city) {
+    window.location.href = `/user/property?city=${city}`;
+  }
+
+  function fetchingApi() {
+    try {
+      let url = "http://localhost:3000/user/homeData";
+      // Here by default we are fetching the original order but if the change is occur in selection then the event will trigger and the api will be updated and you will have updated results.
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          const { Sponsored, newList, futureProject, user } = data;
+          userId = user._id;
+          displaySponsored(Sponsored);
+          displayNewListing(newList, futureProject);
+          displayProfile(user);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // <!-- Calling the fetchAPI function to get the homeData  -->
+  fetchingApi();
+
+  // <!----- TO Display the Sponsored cards   ----->
+  const displaySponsored = async (Sponsored) => {
+    try {
+      console.log({ Sponsored });
+      // DOM for sponsored
+      const container = document.querySelector(".sponsored-listings");
+
+      container.innerHTML = "";
+
+      Sponsored.forEach((ele) => {
+        container.innerHTML += `
+              <div class="property-card">
+                  <div class="property-image" onclick="getPropertyDetail('${ele._id}')">
+                      <img src="${ele.images[0]}" alt="title">
+                      <div class="sponsored-tag">SPONSORED</div>
+                  </div>
+                  <div class="property-details">
+                      <!--  <div class="marketed-by">Marketed by<br>Propshop</div> -->
+                      <h2 class="property-name" onclick="getPropertyDetail('${ele._id}')" >${ele.title}</h2>
+                      <p class="property-location">${ele.city}, ${ele.state}</p>
+                      <div class="property-specs">
+                          <p class="property-type">${ele.configuration} Flats</p>
+                          <p class="property-price">₹ ${ele.price} <span>onwards</span></p>
+                      </div>
+                      <button class="contact-button">Contact Agent</button>
+                  </div>
+              </div>
+      `;
+      });
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  /* <!----- TO Display the  Section-2  and  Section-4  cards   ----->
+   Section-4 :  Future Projects
+   Section-2 : New Listing
+  */
+
+  const displayNewListing = async (newList, futureProject) => {
+    console.log({ newList });
+    console.log({ futureProject });
+    const container = document.getElementById("new-listing-container");
+
+    newList.forEach((ele) => {
+      container.innerHTML += `
+                  <div class="property-card-list">
+                      <div class="property-image-list">
+                          <img src="${ele.images[0]}" alt="${ele.configuration} Flat" onclick="getPropertyDetail('${ele._id}')">
+                          <div class="image-count">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>    <circle cx="8.5" cy="8.5" r="1.5"></circle>    <path d="M20.4 14.5L16 10 4 20"></path></svg>
+                                <div class="property-type-list"> ${ele.images.length}</div>
+                          </div>
+                      </div>
+
+                      <div class="property-details-list">
+                        <div class="property-type-list">
+                                 <span class="bhk">${ele.configuration} Flat</span>
+                                 <span onclick="toggleHeart(this); addFavorite('${ele._id}')">
+                                   <i class="fa-regular fa-heart fa-fade fa-xl"></i>
+                                 </span>
+
+                                 <!-- <span> <i class="fa-solid fa-heart fa-xl" style="color: #ff3d77;"></i> </span> -->
+                         </div>
+
+                          <div class="price-area">
+                              <span class ="price">₹ ${ele.price}</span>
+                              <span class="separator">|</span>
+                              <span class="price">${ele.areaSqFt} sqft</span>
+                          </div>
+
+                          <div class="location">${ele.city}, ${ele.state}</div>
+                          <div class="status">${ele.status}</div>
+                          </div>
+                  </div>
+      `;
+    });
+
+    const container2 = document.getElementById("future-Project-list");
+
+    futureProject.forEach((ele) => {
+      container2.innerHTML += `
+                  <div class="property-card-list">
+                      <div class="property-image-list">
+                          <img src="${ele.images[0]}" alt="${ele.configuration} Flat" onclick="getPropertyDetail('${ele._id}')">
+                          <div class="image-count">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>    <circle cx="8.5" cy="8.5" r="1.5"></circle>    <path d="M20.4 14.5L16 10 4 20"></path></svg>
+                                <div class="property-type-list"> ${ele.images.length}</div>
+                          </div>
+                      </div>
+
+                      <div class="property-details-list">
+                         <div class="property-type-list">
+                              <span class="bhk">${ele.configuration} Flat</span>
+                               <span onclick="toggleHeart(this); addFavorite('${ele._id}')" >
+                                   <i class="fa-regular fa-heart fa-fade fa-xl"></i>
+                                 </span>
+
+                          </div>
+
+                          <div class="price-area">
+                              <span class ="price">₹ ${ele.price}</span>
+                              <span class="separator">|</span>
+                              <span class="price">${ele.areaSqFt} sqft</span>
+                          </div>
+
+                          <div class="location">${ele.city}, ${ele.state}</div>
+                          <div class="status">${ele.status}</div>
+                          </div>
+                  </div>`;
+    });
+  };
+
+  const displayProfile = async (user) => {
+    try {
+      console.log({ profile: user.profilePicture });
+      let img = document.querySelector("#profilePic");
+      let url = user.profilePicture;
+      img.src = url;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function toggleHeart(span) {
+    const regularHeart = '<i class="fa-regular fa-heart fa-fade fa-xl"></i>';
+    const solidHeart =
+      '<i class="fa-solid fa-heart fa-xl" style="color: #ff3d77;"></i>';
+
+    if (span.innerHTML.includes("fa-regular")) {
+      span.innerHTML = solidHeart;
+    } else {
+      span.innerHTML = regularHeart;
+    }
+  }
+
+  // <!------   Function to add in the Favorite   -------->
+  async function addFavorite(propertyId) {
+    console.log({ propertyId });
+
+    const res = await fetch("http://localhost:3000/user/favorites", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        propertyId,
+      }),
+    });
+
+    const data = await res.json();
+    console.log({ data });
+  }
+
+  async function listPage(propertyType) {
+    try {
+      window.location.href = `http://localhost:3000/user/property?propertyType=${propertyType}`;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //  <!--------   Residence Type Based List Page   ----------->
+  async function listPage2(residenceType) {
+    try {
+      window.location.href = `http://localhost:3000/user/property?residenceType=${residenceType}`;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //  <!--------   landType Based List Page   ----------->
+  async function listPage3(landType) {
+    try {
+      window.location.href = `http://localhost:3000/user/property?landType=${landType}`;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // <!---------- Function to redirect the Individual property route   ---------->
+  async function getPropertyDetail(newRoute) {
+    console.log(newRoute);
+    window.location.href = `http://localhost:3000/user/property/${newRoute}`;
+  }
+
+  // <!----   Scrolling functionality for the next and previous buttons  of New Listing    ----->
+  document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("new-listing-container");
+    const prevButton = document.querySelector(".prev-button");
+    const nextButton = document.querySelector(".next-button");
+
+    // Scroll on button click
+    nextButton.addEventListener("click", function () {
+      container.scrollBy({
+        left: 300,
+        behavior: "smooth",
+      });
+    });
+    prevButton.addEventListener("click", function () {
+      container.scrollBy({
+        left: -300,
+        behavior: "smooth",
+      });
+    });
+  });
+
+  // <!-----   Scrolling For the villa    ----->
+  document.addEventListener("DOMContentLoaded", function () {
+    const sliderContainer = document.querySelector(".slider-container");
+    const prevButton = document.querySelector(".prev-button2");
+    const nextButton = document.querySelector(".next-button2");
+    const cardWidth =
+      document.querySelector(".property-type-card").offsetWidth + 20; // Width + gap
+
+    // Scroll to the next or previous set of cards
+    nextButton.addEventListener("click", function () {
+      console.log("clicked");
+      sliderContainer.scrollBy({
+        left: cardWidth,
+        behavior: "smooth",
+      });
+    });
+
+    prevButton.addEventListener("click", function () {
+      sliderContainer.scrollBy({
+        left: -cardWidth,
+        behavior: "smooth",
+      });
+    });
+  });
+
+  const openUserProfile = async (req, res) => {
+    try {
+      window.location.href = `http://localhost:3000/user/profile`;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+</script>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Profile</h1>
+  </body>
+</html>
+
+<script>
+  function fetchingApi() {
+    try {
+      let url = `http://localhost:3000/user/user-profile`;
+      // Here by default we are fetching the original order but if the change is occur in selection then the event will trigger and the api will be updated and you will have updated results.
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // <!-- Calling the fetchAPI function to get the homeData  -->
+  fetchingApi();
+</script>

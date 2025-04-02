@@ -3,9 +3,781 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/output.css" />
     <title>Document</title>
+    <style>
+      body {
+        background-color: #e5f0f7;
+      }
+      .listing-card {
+        display: flex;
+
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 1050px;
+        position: relative;
+        margin: 25px auto;
+        border-bottom-right-radius: 9rem;
+      }
+
+      .image-gallery {
+        width: 40%;
+        position: relative;
+      }
+
+      .main-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+      }
+
+      .thumbnail-container {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .thumbnail {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 4px;
+        border: 2px solid white;
+      }
+
+      .featured-tag {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        background-color: #2c3e50;
+        color: white;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: bold;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+
+      .resale-tag {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #f0f0f0;
+        color: #2c3e50;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 4px;
+      }
+
+      .heart-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 28px;
+        color: white;
+        cursor: pointer;
+        z-index: 1;
+      }
+
+      .view-count {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .more-photos {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 6px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+
+      .listing-details {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .property-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 5px;
+      }
+
+      .property-subtitle {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 15px;
+      }
+
+      .price {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 5px;
+      }
+
+      .price-per-sqft {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .property-specs {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .spec-item {
+        flex: 1;
+        padding: 0 10px;
+      }
+
+      .spec-item:not(:last-child) {
+        border-right: 1px solid #eee;
+      }
+
+      .spec-value {
+        font-size: 16px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 5px;
+      }
+
+      .spec-label {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .highlights {
+        margin-bottom: 20px;
+      }
+
+      .highlight-label {
+        font-size: 16px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .tag {
+        background-color: #f5f5f5;
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .listing-footer {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #eee;
+        padding: 10px 5px;
+        background-color: #f5f5f5;
+        border-radius: 30px;
+      }
+
+      .agent-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .agent-image {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .agent-details {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .featured-dealer {
+        background-color: #ff9800;
+        color: white;
+        font-size: 10px;
+        padding: 2px 5px;
+        border-radius: 3px;
+        margin-bottom: 3px;
+        display: inline-block;
+      }
+
+      .agent-name {
+        font-size: 14px;
+        color: #333;
+      }
+
+      .posted-time {
+        font-size: 12px;
+        color: #777;
+        margin-left: 5px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        border-bottom-right-radius: 10rem;
+      }
+
+      .btn-outline {
+        background-color: white;
+        color: #2196f3;
+        border: 1px solid #2196f3;
+      }
+
+      .btn-primary {
+        background-color: #2196f3;
+        color: white;
+      }
+
+      .phone-icon {
+        margin-right: 5px;
+      }
+
+      @media (max-width: 768px) {
+        .listing-card {
+          flex-direction: column;
+        }
+
+        .image-gallery {
+          width: 100%;
+          height: 250px;
+        }
+
+        .property-specs {
+          flex-wrap: wrap;
+        }
+
+        .spec-item {
+          flex-basis: 50%;
+          margin-bottom: 15px;
+          border-right: none;
+        }
+
+        .listing-footer {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .action-buttons {
+          width: 100%;
+        }
+
+        .btn {
+          flex: 1;
+          text-align: center;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>This is favorite file</h1>
+    <!--------   Nav Bar   -------->
+    <nav class="bg-gray-800">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            <button
+              type="button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
+              <!--
+            Icon when menu is closed.
+
+            Menu open: "hidden", Menu closed: "block"
+             -->
+              <svg
+                class="block size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+              <!--
+            Icon when menu is open.
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+              <svg
+                class="hidden size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+          >
+            <div class="flex shrink-0 items-center">
+              <img
+                class="h-8 w-auto"
+                src="https://res.cloudinary.com/dzm4uznev/image/upload/v1742564729/Modern_Real_Estate_Agency_Logo_Template_1_ydfrd6.png"
+                alt="Your Company"
+              />
+            </div>
+          </div>
+
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+          >
+            <div class="hidden sm:ml-6 sm:block mx-8">
+              <div class="flex space-x-4 mx-8">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a
+                  href="/user/home"
+                  class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                  aria-current="page"
+                  >Home</a
+                >
+                <a
+                  href="/user/favorite"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Favorite</a
+                >
+                <a
+                  href="user/about"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >About</a
+                >
+              </div>
+            </div>
+
+            <!-- Profile dropdown -->
+            <div class="relative ml-3">
+              <div>
+                <button
+                  type="button"
+                  class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <img class="size-8 rounded-full" src="#" alt="" />
+                </button>
+              </div>
+
+              <!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
+              <div
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+                tabindex="-1"
+              >
+                <!-- Active: "bg-gray-100 outline-hidden", Not Active: "" -->
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-0"
+                  >Your Profile</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-1"
+                  >Settings</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-2"
+                  >Sign out</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div class="sm:hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pt-2 pb-3">
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a
+            href="#"
+            class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+            aria-current="page"
+            >Home
+          </a>
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Favorite</a
+          >
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >about</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="flex flex-col" id="Card-Container">
+      <!-----   CardS  ------->
+    </div>
   </body>
+
+  <!------------------------ Script for NavBar ------------------------->
+  <script>
+    // Get DOM elements
+    const mobileMenuButton = document.querySelector(
+      '[aria-controls="mobile-menu"]'
+    );
+    const mobileMenu = document.getElementById("mobile-menu");
+    const userMenuButton = document.getElementById("user-menu-button");
+    const userMenu = document.querySelector(
+      '[aria-labelledby="user-menu-button"]'
+    );
+    const menuOpenIcon = mobileMenuButton.querySelector(".block");
+    const menuCloseIcon = mobileMenuButton.querySelector(".hidden");
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+      const isExpanded =
+        mobileMenuButton.getAttribute("aria-expanded") === "true";
+
+      // Update button state
+      mobileMenuButton.setAttribute("aria-expanded", !isExpanded);
+
+      // Toggle menu visibility
+      if (isExpanded) {
+        mobileMenu.classList.add("hidden");
+        menuOpenIcon.classList.remove("hidden");
+        menuOpenIcon.classList.add("block");
+        menuCloseIcon.classList.remove("block");
+        menuCloseIcon.classList.add("hidden");
+      } else {
+        mobileMenu.classList.remove("hidden");
+        menuOpenIcon.classList.remove("block");
+        menuOpenIcon.classList.add("hidden");
+        menuCloseIcon.classList.remove("hidden");
+        menuCloseIcon.classList.add("block");
+      }
+    }
+
+    // Toggle user dropdown menu
+    function toggleUserMenu() {
+      const isExpanded =
+        userMenuButton.getAttribute("aria-expanded") === "true";
+
+      // Update button state
+      userMenuButton.setAttribute("aria-expanded", !isExpanded);
+
+      // Toggle menu visibility
+      if (isExpanded) {
+        userMenu.classList.add("hidden");
+      } else {
+        userMenu.classList.remove("hidden");
+      }
+    }
+
+    // Close user menu when clicking outside
+    function handleOutsideClick(event) {
+      if (
+        userMenu &&
+        !userMenu.classList.contains("hidden") &&
+        !userMenuButton.contains(event.target) &&
+        !userMenu.contains(event.target)
+      ) {
+        userMenu.classList.add("hidden");
+        userMenuButton.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    // Event listeners
+    mobileMenuButton.addEventListener("click", toggleMobileMenu);
+    userMenuButton.addEventListener("click", toggleUserMenu);
+    document.addEventListener("click", handleOutsideClick);
+
+    // Initialize - ensure menus are hidden initially
+    window.addEventListener("DOMContentLoaded", () => {
+      // Hide mobile menu initially
+      mobileMenu.classList.add("hidden");
+
+      // Hide user dropdown initially
+      userMenu.classList.add("hidden");
+
+      // Set initial aria-expanded states
+      mobileMenuButton.setAttribute("aria-expanded", "false");
+      userMenuButton.setAttribute("aria-expanded", "false");
+
+      // Handle resize events to reset mobile menu state when switching to desktop
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 640) {
+          // 640px is the sm breakpoint in Tailwind
+          mobileMenu.classList.add("hidden");
+          menuOpenIcon.classList.remove("hidden");
+          menuOpenIcon.classList.add("block");
+          menuCloseIcon.classList.remove("block");
+          menuCloseIcon.classList.add("hidden");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  </script>
 </html>
+
+<script>
+  let page = 1; // Start with the first page
+  const limit = 6; // Number of favorites to load per request
+  let isLoading = false; // Prevent multiple API calls
+  let hasMoreData = true; // Stop fetching if no more data
+
+  async function fetchingApi() {
+    if (isLoading || !hasMoreData) return;
+
+    isLoading = true; // Prevent multiple calls
+    const url = `http://localhost:3000/user/fav`;
+
+    console.log({ url });
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      console.log({ data });
+
+      // If no favorites found, stop further fetching
+      if (data.favorites.length === 0) {
+        hasMoreData = false;
+        document.getElementById("end-message").classList.remove("hidden");
+        return;
+      }
+
+      displaycards(data);
+      page++; // Move to next page after loading
+    } catch (error) {
+      console.error("Error fetching favorites:", error.message);
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  // Initial fetch
+  fetchingApi();
+
+  async function displaycards(data) {
+    const { favorites } = data;
+    const container = document.getElementById("Card-Container");
+    container.innerHTML = "";
+    favorites.forEach((ele) => {
+      const perSqrt = Math.floor(ele.price / ele.areaSqFt);
+      const spm = Math.floor(ele.areaSqFt * 0.092903);
+      const status = ele.status == "available" ? "Ready To Move" : ele.status;
+      let curr = new Date();
+      const milliseconds = curr - new Date(ele.createdAt);
+      const time = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+
+      // Append new listings dynamically
+      container.innerHTML += `
+         <div class="listing-card">
+          <div class="image-gallery">
+            <div class="featured-tag">FEATURED</div>
+            <div class="heart-icon">♡</div>
+            <img
+              src="${ele.images[0]}"
+              alt="Apartment Interior"
+              class="main-image"
+            />
+            <div class="thumbnail-container">
+              <img
+                src="${ele.images[1]}"
+                alt="Thumbnail 1"
+                class="thumbnail"
+              />
+              <img
+                src="${ele.images[2]}"
+                alt="Thumbnail 2"
+                class="thumbnail"
+              />
+              <img
+                src="${ele.images[3]}"
+                alt="Thumbnail 3"
+                class="thumbnail"
+              />
+            </div>
+
+            <div class="view-count">
+              <span>🔥</span> 5 people viewed this property today
+            </div>
+            <div class="more-photos">+5 more</div>
+          </div>
+
+          <div class="listing-details">
+            <div class="resale-tag">${ele.status}</div>
+            <h1
+             class="property-title"
+             onclick="getPropertyDetail('${ele._id}')"
+             >
+                ${ele.title}
+            </h1>
+
+            <p class="property-subtitle">
+             ${ele.configuration} Flat in ${ele.location.city}, ${ele.location.state}
+            </p>
+
+            <div class="price">₹ ${ele.price}</div>
+            <div class="price-per-sqft">₹ ${perSqrt} /sqft</div>
+
+            <div class="property-specs">
+              <div class="spec-item">
+                <div class="spec-value">
+                ${ele.areaSqFt} sqft
+                  <span style="font-size: 14px; font-weight: normal; color: #777"
+                    >(${spm} sqm)</span
+                  >
+                </div>
+                <div class="spec-label">Super Built-up Area</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-value">
+                  ${ele.configuration}
+                  <span style="font-size: 14px; font-weight: normal; color: #777"
+                    >(${ele.bathrooms} Baths)</span
+                  >
+                </div>
+                <div class="spec-label">${status}</div>
+              </div>
+            </div>
+
+            <div class="highlights">
+              <div class="highlight-label">Amenities :</div>
+              <div class="tags-container">
+                <span class="tag">${ele.amenities[0]}</span>
+                <span class="tag">${ele.amenities[1]}</span>
+                <span class="tag">${ele.amenities[2]}</span>
+              </div>
+            </div>
+
+            <div class="listing-footer">
+              <div class="agent-info">
+                <img
+                  src="${ele.listedBy.profilePicture}"
+                  alt="Agent"
+                  class="agent-image"
+                />
+                <div class="agent-details">
+                  <span class="featured-dealer">Owner</span>
+                  <span class="agent-name">${ele.listedBy.name}</span>
+                </div>
+                <span class="posted-time">${time}d ago</span>
+              </div>
+              <div class="action-buttons">
+                <button
+                  class="btn btn-outline"
+                  onclick="getPropertyDetail('${ele._id}')"
+                >View Details</button>
+                <button class="btn btn-primary">
+                  <span class="phone-icon">📞</span> Contact
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        `;
+    });
+  }
+
+  // Function to redirect to individual property route
+  async function getPropertyDetail(newRoute) {
+    console.log(newRoute);
+    window.location.href = `http://localhost:3000/user/property/${newRoute}`;
+  }
+
+  // Infinite Scroll with Debounce
+  let scrollTimeout;
+  window.addEventListener("scroll", () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100
+      ) {
+        fetchingApi(); // Load more
+        favorites;
+      }
+    }, 200); // Delay API calls by 200ms
+  });
+</script>

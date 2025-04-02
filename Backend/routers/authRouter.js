@@ -11,11 +11,6 @@ export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
 
-
-authRouter.get("/signup", async (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
-});
-
 authRouter.post("/signup", signUpUser);
 authRouter.post("/login", loginUser);
 authRouter.post("/forgot-password", forgotPassword);

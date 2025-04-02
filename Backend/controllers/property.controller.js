@@ -88,7 +88,7 @@ export const homeData = async (req, res) => {
         }
         ]);
 
-        return res.status(200).json({ Sponsored, newList, futureProject });
+        return res.status(200).json({ user: req.user, Sponsored, newList, futureProject });
     } catch (error) {
 
         console.log(error.message)
@@ -181,7 +181,7 @@ export const getFavorites = async (req, res) => {
 
         // Step 1: Get the authenticated user
         const user = req.user;
-
+        console.log({ fav: user.favorite });
         // Step 2: Populate favorite properties using Property model
         const favoriteProperties = await user.populate({
             path: "favorite",

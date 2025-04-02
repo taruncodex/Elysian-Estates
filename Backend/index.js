@@ -28,6 +28,14 @@ export const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "./public")));
 app.use(morgan("dev"));
+app.get("/", (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname + "./public/homePage.html"));
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({ message: "Internal server error", error: error.message });
+    }
+})
 app.use(authRouter);
 app.use("/user", router)
 // Connecting the mongoDB and listen at port 
