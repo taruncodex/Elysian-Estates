@@ -642,7 +642,7 @@
 
     // Using throttling
     const response = await fetch(
-      `http://localhost:3000/user/search/suggestions?query=${query}`,
+      `https://elysian-estates.onrender.com/user/search/suggestions?query=${query}`,
       {
         method: "GET",
       }
@@ -675,7 +675,7 @@
 
   function fetchingApi() {
     try {
-      let url = "http://localhost:3000/user/homeData";
+      let url = "https://elysian-estates.onrender.com/user/homeData";
       // Here by default we are fetching the original order but if the change is occur in selection then the event will trigger and the api will be updated and you will have updated results.
       fetch(url)
         .then((res) => res.json())
@@ -834,13 +834,16 @@
   async function addFavorite(propertyId) {
     console.log({ propertyId });
 
-    const res = await fetch("http://localhost:3000/user/favorites", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        propertyId,
-      }),
-    });
+    const res = await fetch(
+      "https://elysian-estates.onrender.com/user/favorites",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          propertyId,
+        }),
+      }
+    );
 
     const data = await res.json();
     console.log({ data });

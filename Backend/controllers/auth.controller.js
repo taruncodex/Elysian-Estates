@@ -117,7 +117,7 @@ export const loginUser = async (req, res) => {
         // adding accessToken into the cookie 
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            secure: false,     // Check this when you go for production.
+            secure: true,     // Check this when you go for production.
             sameSite: "strict",
             maxAge: 60 * 60 * 1000,
         });
@@ -125,7 +125,7 @@ export const loginUser = async (req, res) => {
         // adding refreshToken into the cookie 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: false,    // Check this when you go for production.
+            secure: true,    // Check this when you go for production.
             sameSite: "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
@@ -182,7 +182,7 @@ export const forgotPassword = async (req, res) => {
         // add resetToken in cookie
         res.cookie("resetToken", resetToken, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: "strict",
             maxAge: 15 * 60 * 1000,
         });
