@@ -80,7 +80,7 @@ export const loginUser = async (req, res) => {
 
         const { email, password } = req.body;
         // Check if email and password entered currectly. 
-        console.log(email, password);
+        console.log({ email, password });
         if (!email || !password) {
             return res.status(400).json({ msg: "email and password  are required" });
         }
