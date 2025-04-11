@@ -115,6 +115,7 @@
       const res = await fetch("https://elysian-estates.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include", // important.
         body: JSON.stringify({
           email,
           password,

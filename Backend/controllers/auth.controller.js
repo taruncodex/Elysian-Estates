@@ -117,16 +117,16 @@ export const loginUser = async (req, res) => {
         // adding accessToken into the cookie 
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            secure: true,     // Check this when you go for production.
-            sameSite: "strict",
+            secure: process.env.NODE_ENV === "production", // toggle based on env
+            sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
             maxAge: 60 * 60 * 1000,
         });
 
         // adding refreshToken into the cookie 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: true,    // Check this when you go for production.
-            sameSite: "strict",
+            secure: process.env.NODE_ENV === "production", // toggle based on env
+            sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
@@ -182,8 +182,8 @@ export const forgotPassword = async (req, res) => {
         // add resetToken in cookie
         res.cookie("resetToken", resetToken, {
             httpOnly: true,
-            secure: true,
-            sameSite: "strict",
+            secure: process.env.NODE_ENV === "production", // toggle based on env
+            sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
             maxAge: 15 * 60 * 1000,
         });
         console.log("Reset Password add to cookie.")
@@ -308,8 +308,8 @@ export const checkForToken = async (req, res, next) => {
             // Save the accessToken in to cookie
             res.cookie("accessToken", newAccessToken, {
                 httpOnly: true,
-                secure: true,
-                sameSite: "strict",
+                secure: process.env.NODE_ENV === "production", // toggle based on env
+                sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
                 maxAge: 60 * 60 * 1000,
             });
 
