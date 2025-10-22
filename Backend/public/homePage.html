@@ -98,7 +98,6 @@
                   >Home</a
                 >
                 <a
-                  href="/user/favorite"
                   class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                   >Favorite</a
                 >
@@ -225,7 +224,7 @@
         <div class="head">
           <h2>Find Your Happy Place</h2>
           <div class="line"></div>
-          <h1 class="text-2xl">A Wonderful Gift</h1>
+          <h1 class="text-2xl">Discover Your Slice of Paradise</h1>
           <a href="#" class="ctn">Explore</a>
         </div>
       </div>
@@ -522,8 +521,7 @@
         </div>
 
         <div class="row">
-          INFERNO Copyright © 2021 Inferno - All rights reserved || Designed By:
-          Mahesh
+          Copyright © 2025 All rights reserved || Designed By: Tarun Rathore
         </div>
       </div>
     </footer>
@@ -675,6 +673,7 @@
 
   function fetchingApi() {
     try {
+      console.log("Api calling.");
       let url = "http://localhost:3000/user/homeData";
       // Here by default we are fetching the original order but if the change is occur in selection then the event will trigger and the api will be updated and you will have updated results.
       fetch(url)

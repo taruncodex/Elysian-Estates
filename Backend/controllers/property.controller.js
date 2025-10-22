@@ -182,6 +182,7 @@ export const getFavorites = async (req, res) => {
         // Step 1: Get the authenticated user
         const user = req.user;
         console.log({ fav: user.favorite });
+
         // Step 2: Populate favorite properties using Property model
         const favoriteProperties = await user.populate({
             path: "favorite",
@@ -198,6 +199,9 @@ export const getFavorites = async (req, res) => {
 
 export const addFavorites = async (req, res) => {
     try {
+
+
+        
         // Step 1: Get the propertyId from request body
         // Step 2: Get the user from req.user (after authentication)
         // Step 3: Check if the property is already in the favorites

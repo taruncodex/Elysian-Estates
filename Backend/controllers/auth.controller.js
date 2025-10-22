@@ -28,6 +28,7 @@ export const signUpUser = async (req, res) => {
         // Step-6 : Send the success response.
 
 
+        
         // Get data from the user
         const { email, name, password, phone } = req.body;
         console.log(email, name, password, phone)

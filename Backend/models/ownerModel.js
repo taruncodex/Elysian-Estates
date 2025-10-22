@@ -10,22 +10,22 @@ const ownerSchema = new Schema({
     },
     profilePicture: { type: String, default: "" },
     email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-},
-    phone: {
-    type: String,
-    required: true,
-    trim: true,
-},
-    properties: [
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'Property',
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
     },
-],
+    phone: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    properties: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Property',
+        },
+    ],
 });
 
 export const Owner = model('Owner', ownerSchema);
