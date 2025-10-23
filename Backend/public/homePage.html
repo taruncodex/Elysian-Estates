@@ -640,7 +640,7 @@
 
     // Using throttling
     const response = await fetch(
-      `http://localhost:3000/user/search/suggestions?query=${query}`,
+      `https://elysian-estates-1.onrender.com/user/search/suggestions?query=${query}`,
       {
         method: "GET",
       }
@@ -674,7 +674,7 @@
   function fetchingApi() {
     try {
       console.log("Api calling.");
-      let url = "http://localhost:3000/user/homeData";
+      let url = "https://elysian-estates-1.onrender.com/user/homeData";
       // Here by default we are fetching the original order but if the change is occur in selection then the event will trigger and the api will be updated and you will have updated results.
       fetch(url)
         .then((res) => res.json())
@@ -833,13 +833,16 @@
   async function addFavorite(propertyId) {
     console.log({ propertyId });
 
-    const res = await fetch("http://localhost:3000/user/favorites", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        propertyId,
-      }),
-    });
+    const res = await fetch(
+      "https://elysian-estates-1.onrender.com/user/favorites",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          propertyId,
+        }),
+      }
+    );
 
     const data = await res.json();
     console.log({ data });
@@ -847,7 +850,7 @@
 
   async function listPage(propertyType) {
     try {
-      window.location.href = `http://localhost:3000/user/property?propertyType=${propertyType}`;
+      window.location.href = `https://elysian-estates-1.onrender.com/user/property?propertyType=${propertyType}`;
     } catch (error) {
       console.log(error);
     }
@@ -856,7 +859,7 @@
   //  <!--------   Residence Type Based List Page   ----------->
   async function listPage2(residenceType) {
     try {
-      window.location.href = `http://localhost:3000/user/property?residenceType=${residenceType}`;
+      window.location.href = `https://elysian-estates-1.onrender.com/user/property?residenceType=${residenceType}`;
     } catch (error) {
       console.log(error);
     }
@@ -865,7 +868,7 @@
   //  <!--------   landType Based List Page   ----------->
   async function listPage3(landType) {
     try {
-      window.location.href = `http://localhost:3000/user/property?landType=${landType}`;
+      window.location.href = `https://elysian-estates-1.onrender.com/user/property?landType=${landType}`;
     } catch (error) {
       console.log(error);
     }
@@ -874,7 +877,7 @@
   // <!---------- Function to redirect the Individual property route   ---------->
   async function getPropertyDetail(newRoute) {
     console.log(newRoute);
-    window.location.href = `http://localhost:3000/user/property/${newRoute}`;
+    window.location.href = `https://elysian-estates-1.onrender.com/user/property/${newRoute}`;
   }
 
   // <!----   Scrolling functionality for the next and previous buttons  of New Listing    ----->
@@ -925,7 +928,7 @@
 
   const openUserProfile = async (req, res) => {
     try {
-      window.location.href = `http://localhost:3000/user/profile`;
+      window.location.href = `https://elysian-estates-1.onrender.com/user/profile`;
     } catch (error) {
       console.log(error);
     }
