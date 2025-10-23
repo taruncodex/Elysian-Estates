@@ -260,6 +260,38 @@
     <div class="listContainer">
       <div class="properties-container-list">
         <div class="property-cards-list" id="new-listing-container"></div>
+
+        <div class="scroll-button prev-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </div>
+
+        <div class="scroll-button next-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </div>
       </div>
     </div>
 
@@ -408,63 +440,61 @@
 
     <!---------------------- Section-4 : Future Projects ------------------------->
 
-    <div class="container4">
-      <h1
-        style="
-          font-size: 4vmin;
-          color: #091e42;
-          font-weight: 700;
-          margin: 0px 10px 0px 2%;
-        "
-      >
-        Interested in Future Projects ?
-      </h1>
-      <p
-        style="
-          font-size: 15px;
-          margin: 0px 10px 25px 2%;
-          color: #091e42;
-          font-weight: 200;
-        "
-      >
-        Browse Under construction options
-      </p>
+    <h1
+      style="
+        font-size: 4vmin;
+        color: #091e42;
+        font-weight: 700;
+        margin: 0px 10px 0px 2%;
+      "
+    >
+      Interested in Future Projects ?
+    </h1>
+    <p
+      style="
+        font-size: 15px;
+        margin: 0px 10px 25px 2%;
+        color: #091e42;
+        font-weight: 200;
+      "
+    >
+      Browse Under construction options
+    </p>
 
-      <div class="listContainer">
-        <div class="properties-container-list">
-          <div class="property-cards-list" id="future-Project-list"></div>
+    <div class="listContainer">
+      <div class="properties-container-list">
+        <div class="property-cards-list" id="future-Project-list"></div>
 
-          <div class="scroll-button future-prev">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M15 18l-6-6 6-6"></path>
-            </svg>
-          </div>
+        <div class="scroll-button future-prev">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </div>
 
-          <div class="scroll-button future-next">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M9 18l6-6-6-6"></path>
-            </svg>
-          </div>
+        <div class="scroll-button future-next">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
         </div>
       </div>
     </div>
@@ -899,7 +929,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("future-Project-list");
     const prevButton = document.querySelector(".future-prev");
-    const nextButton = document.querySelector(".future-next");
+    const nextButton = document.querySelector(".");
 
     // Scroll on button click
     nextButton.addEventListener("click", function () {
