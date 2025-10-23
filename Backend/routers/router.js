@@ -28,7 +28,7 @@ router.get("/profile", async (req, res) => {
 
 
 // Serving the favorite file
-router.get("/favorite", checkForToken, async (req, res) => {
+router.get("/user/favorite", checkForToken, async (req, res) => {
     try {
         console.log(req.user);
         res.sendFile(path.join(__dirname, "../public/favorite.html"));
@@ -63,13 +63,13 @@ router.get("/homeData", checkForToken, homeData);
 router.get("/search/suggestions", checkForToken, searchSuggestion);
 
 // Get the city by searching  : GET /search/results?city=cityName
-router.get("/search/results", checkForToken, searchResult)
+router.get("/search/results", checkForToken, searchResult);
 
 
 // Getting the favorite from the user data 
 router.get("/fav", checkForToken, getFavorites);
 
-router.get("/properties/filter", checkForToken, applyFilter)
+router.get("/properties/filter", checkForToken, applyFilter);
 
 
 // Adding and removing from the favorite.
@@ -80,11 +80,9 @@ router.delete("/favorites/:id", checkForToken, removeFavorite);
 
 router.get("/user-profile/", checkForToken, async (req, res) => {
     try {
-
         const id = req.user.id;
         const data = await User.findById(id);
         return res.status(201).json({ data });
-
     } catch (error) {
         console.log(error.message);
         return res.status(500).json({ error: error.message });
