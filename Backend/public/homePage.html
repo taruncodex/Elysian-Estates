@@ -738,6 +738,12 @@
     console.log(futureProject);
     console.log(user);
 
+    const favProperties = user.map((ele) => {
+      return ele.favorite;
+    });
+
+
+    console.log(favProperties);
     const container = document.getElementById("new-listing-container");
 
     newList.forEach((ele) => {
@@ -755,10 +761,10 @@
                         <div class="property-type-list">
                                  <span class="bhk">${ele.configuration} Flat</span>
                                  <span onclick="toggleHeart(this); addFavorite('${ele._id}')">
+                                  ${}
 
-                                 
                                    <i class="fa-regular fa-heart fa-fade fa-xl"></i>
-      
+
                                  </span>
 
                                  <!-- <span> <i class="fa-solid fa-heart fa-xl" style="color: #ff3d77;"></i> </span> -->
