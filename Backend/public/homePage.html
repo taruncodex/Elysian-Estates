@@ -743,9 +743,18 @@
     });
 
     console.log(favProperties);
+
     const container = document.getElementById("new-listing-container");
 
     newList.forEach((ele) => {
+      // Check if current property is in user's favorites
+      const isFav = favProperties.includes(ele._id);
+
+      // Choose the icon based on that
+      const heartIcon = isFav
+        ? `<i class="fa-solid fa-heart fa-xl" style="color: #ff3d77;"></i>`
+        : `<i class="fa-regular fa-heart fa-fade fa-xl"></i>`;
+
       container.innerHTML += `
                   <div class="property-card-list">
                       <div class="property-image-list">
@@ -760,9 +769,7 @@
                         <div class="property-type-list">
                                  <span class="bhk">${ele.configuration} Flat</span>
                                  <span onclick="toggleHeart(this); addFavorite('${ele._id}')">
-                                  
-                                   <i class="fa-regular fa-heart fa-fade fa-xl"></i>
-
+                                  ${heartIcon}
                                  </span>
 
                                  <!-- <span> <i class="fa-solid fa-heart fa-xl" style="color: #ff3d77;"></i> </span> -->
