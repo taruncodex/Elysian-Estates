@@ -142,7 +142,6 @@ export const loginUser = async (req, res) => {
     }
 }
 
-
 const sendResetEmail = async (email, token) => {
     try {
         const resetLink = `${process.env.BASE_URL}/reset-password/${token}`;

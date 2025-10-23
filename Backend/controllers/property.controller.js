@@ -60,7 +60,7 @@ export const homeData = async (req, res) => {
                     status: 1,
                     city: "$location.city",
                     state: "$location.state",
-                }
+                 }
             }
         ])
 
@@ -113,7 +113,6 @@ export const searchSuggestion = async (req, res) => {
         });
 
         console.log({ cities });
-
         return res.status(200).json({ cities });
 
     } catch (error) {
@@ -199,8 +198,6 @@ export const getFavorites = async (req, res) => {
 
 export const addFavorites = async (req, res) => {
     try {
-
-
         
         // Step 1: Get the propertyId from request body
         // Step 2: Get the user from req.user (after authentication)
@@ -231,7 +228,6 @@ export const addFavorites = async (req, res) => {
         return res.status(500).json({ message: "Internal Server Error.", error: error.message });
     }
 }
-
 
 export const removeFavorite = async (req, res) => {
     const { id } = req.params; // Property ID
