@@ -27,30 +27,24 @@ router.get("/profile", async (req, res) => {
 });
 
 
-
 // Serving the favorite file
 router.get("/favorite", checkForToken, async (req, res) => {
     try {
-        // console.log(req.user);
+        console.log(req.user);
         res.sendFile(path.join(__dirname, "../public/favorite.html"));
     } catch (error) {
         res.status(500).json({ message: "Internal Server error", error: error.message });
     }
 });
 
-
-
-
-// <!------  Property Lisst Detail  ------>
+// <!------  Property List Detail  ------>
 router.get("/property", async (req, res) => {
     try {
         res.sendFile(path.join(__dirname, "../public/propertyList.html"))
     } catch (error) {
         res.status(500).json({ message: "Internal Server error", error: error.message });
     }
-})
-
-
+});
 
 // <!------  Property Detail Route  -------->
 router.get("/property/:id", (req, res) => {
@@ -59,10 +53,7 @@ router.get("/property/:id", (req, res) => {
     } catch (error) {
         res.status(500).json({ message: "Internal Server error", error: error.message });
     }
-})
-
-
-
+});
 
 // http://localhost:3000/user/homeData 
 router.get("/homeData", checkForToken, homeData);

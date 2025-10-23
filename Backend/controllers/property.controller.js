@@ -60,7 +60,7 @@ export const homeData = async (req, res) => {
                     status: 1,
                     city: "$location.city",
                     state: "$location.state",
-                 }
+                }
             }
         ])
 
@@ -102,11 +102,9 @@ export const searchSuggestion = async (req, res) => {
         console.log("Entered into the suggestion route");
         // GET /api/search/suggestions?query=city 
         const { query } = req.query;
-
         if (!query || query.length < 2) {
             return res.status(400).json({ message: "Query must be at least 2 characters" });
         }
-
         // Step 1: Find distinct city names that match the search term
         const cities = await Property.distinct("location.city", {
             "location.city": { $regex: query, $options: "i" } // Case-insensitive search
@@ -198,7 +196,7 @@ export const getFavorites = async (req, res) => {
 
 export const addFavorites = async (req, res) => {
     try {
-        
+
         // Step 1: Get the propertyId from request body
         // Step 2: Get the user from req.user (after authentication)
         // Step 3: Check if the property is already in the favorites

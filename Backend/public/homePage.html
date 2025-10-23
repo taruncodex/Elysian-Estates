@@ -98,6 +98,7 @@
                   >Home</a
                 >
                 <a
+                  href="user/favorite"
                   class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                   >Favorite</a
                 >
@@ -925,6 +926,29 @@
       });
     });
   });
+
+  // <!----   Scrolling functionality for the next and previous buttons  of New Listing    ----->
+  document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("future-Project-list");
+    const prevButton = document.querySelector(".prev-button");
+    const nextButton = document.querySelector(".next-button");
+
+    // Scroll on button click
+    nextButton.addEventListener("click", function () {
+      container.scrollBy({
+        left: 300,
+        behavior: "smooth",
+      });
+    });
+    prevButton.addEventListener("click", function () {
+      container.scrollBy({
+        left: -300,
+        behavior: "smooth",
+      });
+    });
+  });
+
+  document.addEventListener("");
 
   const openUserProfile = async (req, res) => {
     try {
