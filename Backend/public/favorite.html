@@ -610,7 +610,7 @@
     if (isLoading || !hasMoreData) return;
 
     isLoading = true; // Prevent multiple calls
-    const url = `http://localhost:3000/user/fav`;
+    const url = `https://elysian-estates-1.onrender.com/user/fav`;
 
     console.log({ url });
 
@@ -763,7 +763,7 @@
   // Function to redirect to individual property route
   async function getPropertyDetail(newRoute) {
     console.log(newRoute);
-    window.location.href = `http://localhost:3000/user/property/${newRoute}`;
+    window.location.href = `https://elysian-estates-1.onrender.com/user/property/${newRoute}`;
   }
 
   // Infinite Scroll with Debounce
