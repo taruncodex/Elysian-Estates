@@ -210,7 +210,7 @@ export const addFavorites = async (req, res) => {
         const user = req.user;
 
         const alreadyInFavorites = user.favorite.includes(propertyId);
-
+        console.log({ alreadyInFavorites });
         if (alreadyInFavorites) {
             await user.updateOne({ $pull: { favorite: propertyId } });
             return res.status(200).json({ message: "Property removed from favorites." });

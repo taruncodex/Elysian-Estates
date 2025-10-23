@@ -683,7 +683,7 @@
           const { Sponsored, newList, futureProject, user } = data;
           userId = user._id;
           displaySponsored(Sponsored);
-          displayNewListing(newList, futureProject);
+          displayNewListing(newList, futureProject, user);
           displayProfile(user);
         });
     } catch (error) {
@@ -733,9 +733,11 @@
    Section-2 : New Listing
   */
 
-  const displayNewListing = async (newList, futureProject) => {
-    console.log({ newList });
-    console.log({ futureProject });
+  const displayNewListing = async (newList, futureProject, user) => {
+    console.log(newList);
+    console.log(futureProject);
+    console.log(user);
+
     const container = document.getElementById("new-listing-container");
 
     newList.forEach((ele) => {
@@ -753,7 +755,10 @@
                         <div class="property-type-list">
                                  <span class="bhk">${ele.configuration} Flat</span>
                                  <span onclick="toggleHeart(this); addFavorite('${ele._id}')">
+
+                                 
                                    <i class="fa-regular fa-heart fa-fade fa-xl"></i>
+      
                                  </span>
 
                                  <!-- <span> <i class="fa-solid fa-heart fa-xl" style="color: #ff3d77;"></i> </span> -->
