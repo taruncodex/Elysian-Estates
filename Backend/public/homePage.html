@@ -466,7 +466,7 @@
         <div class="properties-container-list">
           <div class="property-cards-list" id="future-Project-list"></div>
 
-          <div class="scroll-button prev-button">
+          <div class="scroll-button future-prev">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -482,7 +482,7 @@
             </svg>
           </div>
 
-          <div class="scroll-button next-button">
+          <div class="scroll-button future-next">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -930,8 +930,8 @@
   // <!----   Scrolling functionality for the future of New Listing    ----->
   document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("future-Project-list");
-    const prevButton = document.querySelector(".prev-button");
-    const nextButton = document.querySelector(".next-button");
+    const prevButton = document.querySelector(".future-prev");
+    const nextButton = document.querySelector(".future-next");
 
     // Scroll on button click
     nextButton.addEventListener("click", function () {
@@ -947,8 +947,6 @@
       });
     });
   });
-
-  document.addEventListener("");
 
   const openUserProfile = async (req, res) => {
     try {
